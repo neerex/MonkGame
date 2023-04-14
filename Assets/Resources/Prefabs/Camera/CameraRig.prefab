@@ -46,9 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe65c818bf047a0864bf382022f652b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distance: {fileID: 5465251309397243014}
-  _rotation: {fileID: 5465251310436024927}
-  _camera: {fileID: 5465251309437325511}
+  <Distance>k__BackingField: {fileID: 5465251309397243014}
+  <Rotation>k__BackingField: {fileID: 5465251310436024927}
+  <Camera>k__BackingField: {fileID: 5465251309437325511}
 --- !u!114 &5465251309120156706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dcb6575b4a5470b8a4ea508cf4590bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectToFollow: {fileID: 0}
+  _transformToFollow: {fileID: 0}
   _cameraRig: {fileID: 5465251309120156707}
   _followSpeed: 3
 --- !u!1 &5465251309397243017
@@ -88,7 +88,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5465251309397243017}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 15, z: -10}
+  m_LocalPosition: {x: 0, y: 9, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

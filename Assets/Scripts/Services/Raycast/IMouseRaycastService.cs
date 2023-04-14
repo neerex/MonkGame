@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace MainGame.Raycasts
+namespace MainGame.Services.Raycast
 {
-    public interface IMouseRaycastDirectionProvider
+    public interface IMouseRaycastService
     {
         Vector3 GetDirectionToRaycastHit(Vector3 fromPosition);
     }

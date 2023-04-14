@@ -4,8 +4,8 @@ namespace MainGame.Camera
 {
     public class CameraRig : MonoBehaviour
     {
-        [SerializeField] private Transform _distance;
-        [SerializeField] private Transform _rotation;
-        [SerializeField] private UnityEngine.Camera _camera;
+        [field:SerializeField] public Transform Distance { get; private set; }
+        [field:SerializeField] public Transform Rotation { get; private set; }
+        [field:SerializeField] public UnityEngine.Camera Camera { get; private set; }
     }
 }

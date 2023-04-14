@@ -465,11 +465,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7382323913642961000}
-  - component: {fileID: 7382323913642961006}
-  - component: {fileID: 7382323913642961007}
-  - component: {fileID: 7382323913642961004}
   - component: {fileID: 7382323913642960994}
-  - component: {fileID: 966402105}
+  - component: {fileID: 7382323913642961006}
+  - component: {fileID: 835678943273033497}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -493,45 +491,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7382323913642961006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7382323913642961003}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 544a255475273214684f0cab1e2c0581, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _movementSpeed: 3
-  _jumpSpeed: 5
-  _rotationSpeed: 10
---- !u!114 &7382323913642961007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7382323913642961003}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2717676f579e49eaad8d16deb5aee764, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7382323913642961004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7382323913642961003}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 966c16e5339847ea98a084f850a8e362, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &7382323913642960994
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -548,7 +507,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &966402105
+--- !u!114 &7382323913642961006
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -557,12 +516,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 7382323913642961003}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6173a4b255bdee64fbc132d6ba51d6df, type: 3}
+  m_Script: {fileID: 11500000, guid: 544a255475273214684f0cab1e2c0581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _curve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+--- !u!114 &835678943273033497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7382323913642961003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a50c29dbf384de3b551cb6d13ee6805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _movementSpeed: 5
+  _jumpSpeed: 5
+  _rotationSpeed: 10
