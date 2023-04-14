@@ -1,4 +1,3 @@
-using System;
 using MainGame.Input;
 using MainGame.Raycasts;
 using UnityEngine;
@@ -7,36 +6,41 @@ namespace MainGame.Player
 {
     public class Player : MonoBehaviour, IControllable
     {
-        [SerializeField] private float _speed;
-        private CharacterController _characterController;
+        [SerializeField] private float _movementSpeed = 10f;
+        [SerializeField] private float _jumpSpeed = 2f;
+        [SerializeField] private float _rotationSpeed = 10f;
+        
+        private Rigidbody _rigidbody;
         private IMouseRaycastDirectionProvider _lookAtDirection;
 
         private void Awake()
         {
-            _characterController = GetComponent<CharacterController>();
+            _rigidbody = GetComponent<Rigidbody>();
             _lookAtDirection = GetComponent<IMouseRaycastDirectionProvider>();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             LookAtCursor();
         }
 
         public void Move(Vector3 direction)
         {
-            var speed = Time.deltaTime * _speed;
-            _characterController.Move(direction * speed);
+            var velocity = _movementSpeed * direction;
+            velocity.y = _rigidbody.velocity.y;
+            _rigidbody.velocity = velocity;
         }
 
         public void Jump()
         {
-            Debug.Log("Jump");
+            _rigidbody.velocity += Vector3.up * _jumpSpeed;
         }
 
         private void LookAtCursor()
         {
             var directionToLookAt = _lookAtDirection.GetDirectionToRaycastHit(transform.position);
-            transform.rotation = Quaternion.LookRotation(directionToLookAt, Vector3.up);
+            var cross = Vector3.Cross(transform.forward, directionToLookAt);
+            _rigidbody.angularVelocity = new Vector3(0, cross.y * _rotationSpeed, 0);
         }
     }
 }

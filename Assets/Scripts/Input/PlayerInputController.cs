@@ -25,7 +25,7 @@ namespace MainGame.Input
             _gameInput.Gameplay.Jump.performed -= JumpPerformed;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             var movementVector = _gameInput.Gameplay.Movement.ReadValue<Vector2>();
             var direction = new Vector3(movementVector.x, 0, movementVector.y);
@@ -33,7 +33,6 @@ namespace MainGame.Input
             _controllable.Move(direction);
         }
 
-        // ReSharper disable Unity.PerformanceAnalysis
         public Vector2 GetMousePosition() => 
             _gameInput.Gameplay.MousePosition.ReadValue<Vector2>();
 

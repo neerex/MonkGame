@@ -6,14 +6,14 @@ namespace MainGame.Raycasts
 {
     public class LookAtCursor : MonoBehaviour, IMouseRaycastDirectionProvider
     {
-        private Camera _camera;
+        private UnityEngine.Camera _camera;
         private Plane _plane;
         private PlayerInputController _inputController;
 
         private void Awake()
         {
             _inputController = GetComponent<PlayerInputController>();
-            _camera = Camera.main;
+            _camera = UnityEngine.Camera.main;
             _plane = new Plane(Vector3.up, Vector3.zero);
         }
 
