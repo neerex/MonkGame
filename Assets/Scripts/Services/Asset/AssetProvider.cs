@@ -1,30 +1,31 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace MainGame.Services.Asset
 {
     public class AssetProvider : IAssetProvider
     {
-        public GameObject Instantiate(string address)
+        public async UniTask<GameObject> Instantiate(string address)
         {
-            GameObject prefab = Resources.Load<GameObject>(address);
+            GameObject prefab = await Resources.LoadAsync<GameObject>(address) as GameObject;
             return Object.Instantiate(prefab);
         }
 
-        public GameObject Instantiate(string address, Vector3 at) 
+        public async UniTask<GameObject> Instantiate(string address, Vector3 at)
         {
-            GameObject prefab = Resources.Load<GameObject>(address);
+            GameObject prefab = await Resources.LoadAsync<GameObject>(address) as GameObject;
             return Object.Instantiate(prefab, at, Quaternion.identity);
         }
 
-        public GameObject Instantiate(string address, Vector3 at, Quaternion rotation)
+        public async UniTask<GameObject> Instantiate(string address, Vector3 at, Quaternion rotation)
         {
-            GameObject prefab = Resources.Load<GameObject>(address);
+            GameObject prefab = await Resources.LoadAsync<GameObject>(address) as GameObject;
             return Object.Instantiate(prefab, at, rotation);
         }
 
-        public GameObject Instantiate(string address, Vector3 at, Quaternion rotation, Transform parent)
+        public async UniTask<GameObject> Instantiate(string address, Vector3 at, Quaternion rotation, Transform parent)
         {
-            GameObject prefab = Resources.Load<GameObject>(address);
+            GameObject prefab = await Resources.LoadAsync<GameObject>(address) as GameObject;
             return Object.Instantiate(prefab, at, rotation, parent);
         }
     }

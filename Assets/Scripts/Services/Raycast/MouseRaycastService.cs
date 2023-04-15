@@ -7,8 +7,8 @@ namespace MainGame.Services.Raycast
 {
     public class MouseRaycastService : IMouseRaycastService
     {
-        private ICameraService _cameraService;
-        private IPlayerInputService _inputService;
+        private readonly ICameraService _cameraService;
+        private readonly IPlayerInputService _inputService;
         private Plane _plane;
         private UnityEngine.Camera _camera; 
 
@@ -22,7 +22,7 @@ namespace MainGame.Services.Raycast
         
         public Vector3 GetDirectionToRaycastHit(Vector3 fromPosition)
         {
-            _camera ??= _cameraService.GetCameraRig().Camera;
+            _camera ??= _cameraService.CameraRig.Camera;
             if (_camera is null) return Vector3.zero;
             
             Ray ray = _camera.ScreenPointToRay(_inputService.GetMousePosition());

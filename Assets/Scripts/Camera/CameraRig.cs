@@ -2,6 +2,7 @@
 
 namespace MainGame.Camera
 {
+    [RequireComponent(typeof(CameraFollow))]
     public class CameraRig : MonoBehaviour
     {
         [field:SerializeField] public Transform Distance { get; private set; }
