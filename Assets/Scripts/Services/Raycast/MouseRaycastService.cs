@@ -12,6 +12,7 @@ namespace MainGame.Services.Raycast
         private Plane _plane;
         private UnityEngine.Camera _camera; 
 
+        // consider to put ITickable here and do constant raycast to environment to collect RaycastData
         public MouseRaycastService(IPlayerInputService inputService, ICameraService cameraService)
         {
             _inputService = inputService;

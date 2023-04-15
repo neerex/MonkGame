@@ -10,10 +10,11 @@ namespace MainGame.Services.Asset
         private readonly IAssetProvider _assetProvider;
         private readonly DiContainer _diContainer;
 
-        public InjectedAssetProvider(IAssetProvider assetProvider, DiContainer diContainer)
+        public InjectedAssetProvider(IAssetProvider assetProvider, DiContainer diContainer, IInstantiator instantiator)
         {
             _assetProvider = assetProvider;
             _diContainer = diContainer;
+            _instantiator = instantiator;
         }
 
         public GameObject Instantiate(GameObject prefab, Transform parent = null)

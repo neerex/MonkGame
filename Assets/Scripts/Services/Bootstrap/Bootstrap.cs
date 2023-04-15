@@ -5,7 +5,7 @@ using MainGame.StaticData;
 using UnityEngine;
 using Zenject;
 
-namespace MainGame.Bootstrap
+namespace MainGame.Services.Bootstrap
 {
     public class Bootstrap : MonoBehaviour
     {
