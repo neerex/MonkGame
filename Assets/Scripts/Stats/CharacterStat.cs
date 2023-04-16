@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace MainGame.Stats
 {
-    public class CharacterStat<T>
+    public abstract class CharacterStat<T>
     {
 	    private readonly T _baseValue;
 
@@ -87,7 +87,7 @@ namespace MainGame.Stats
 			{
 				finalValue = mod.Calculate(finalValue);
 			}
-
+			
 			Value = finalValue;
 		}
     }

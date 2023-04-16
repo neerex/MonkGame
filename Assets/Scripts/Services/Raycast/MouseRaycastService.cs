@@ -1,4 +1,5 @@
-﻿using MainGame.Services.Camera;
+﻿using MainGame.Camera;
+using MainGame.Services.Camera;
 using MainGame.Services.Input;
 using MainGame.Utilities;
 using UnityEngine;
@@ -10,7 +11,7 @@ namespace MainGame.Services.Raycast
         private readonly ICameraService _cameraService;
         private readonly IPlayerInputService _inputService;
         private Plane _plane;
-        private UnityEngine.Camera _camera; 
+        private CameraRig _cameraRig; 
 
         // consider to put ITickable here and do constant raycast to environment to collect RaycastData
         public MouseRaycastService(IPlayerInputService inputService, ICameraService cameraService)
@@ -23,10 +24,10 @@ namespace MainGame.Services.Raycast
         
         public Vector3 GetDirectionToRaycastHit(Vector3 fromPosition)
         {
-            _camera ??= _cameraService.CameraRig.Camera;
-            if (_camera is null) return Vector3.zero;
+            _cameraRig ??= _cameraService.CameraRig;
+            if (_cameraRig is null) return Vector3.zero;
             
-            Ray ray = _camera.ScreenPointToRay(_inputService.GetMousePosition());
+            Ray ray = _cameraRig.Camera.ScreenPointToRay(_inputService.GetMousePosition());
             _plane.Raycast(ray, out float enter);
             Vector3 hitPoint = ray.GetPoint(enter);
             Vector3 direction = (hitPoint.FlatY() - fromPosition.FlatY()).normalized;
