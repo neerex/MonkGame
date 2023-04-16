@@ -1,6 +1,7 @@
 ﻿using System;
 using MainGame.Services.Input;
 using MainGame.Services.Raycast;
+using MainGame.Stats;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -8,15 +9,18 @@ using Zenject;
 namespace MainGame.Player
 {
     [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(ICharacterStatHolder))]
     public class PlayerMovement : MonoBehaviour
     {
-        [SerializeField] private float _movementSpeed = 5f;
         [SerializeField] private float _jumpSpeed = 5f;
         [SerializeField] private float _rotationSpeed = 10f;
         
         private Rigidbody _rigidbody;
         private IPlayerInputService _inputService;
         private IMouseRaycastService _mouseRaycastService;
+        private ICharacterStatHolder _characterStatHolder;
+
+        private MovementSpeedStat _movementSpeed;
 
         [Inject]
         public void Construct(IPlayerInputService inputService, IMouseRaycastService mouseRaycastService)
@@ -30,6 +34,12 @@ namespace MainGame.Player
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
+            _characterStatHolder = GetComponent<ICharacterStatHolder>();
+        }
+
+        private void Start()
+        {
+            _characterStatHolder.GetStat(out _movementSpeed);
         }
 
         private void FixedUpdate()
@@ -41,7 +51,7 @@ namespace MainGame.Player
         private void Move()
         {
             var direction = _inputService.GetInputDirection();
-            var velocity = _movementSpeed * direction;
+            var velocity = _movementSpeed.Value * direction;
             velocity.y = _rigidbody.velocity.y;
             _rigidbody.velocity = velocity;
         }
