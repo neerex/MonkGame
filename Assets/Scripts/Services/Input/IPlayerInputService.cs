@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace MainGame.Input
+namespace MainGame.Services.Input
 {
     public interface IPlayerInputService
     {

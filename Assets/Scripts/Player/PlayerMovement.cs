@@ -1,5 +1,5 @@
 ﻿using System;
-using MainGame.Input;
+using MainGame.Services.Input;
 using MainGame.Services.Raycast;
 using UnityEngine;
 using UnityEngine.InputSystem;

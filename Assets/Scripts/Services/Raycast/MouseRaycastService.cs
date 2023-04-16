@@ -1,5 +1,5 @@
-﻿using MainGame.Input;
-using MainGame.Services.Camera;
+﻿using MainGame.Services.Camera;
+using MainGame.Services.Input;
 using MainGame.Utilities;
 using UnityEngine;
 
