@@ -1,8 +1,6 @@
 using Cysharp.Threading.Tasks;
 using MainGame.CharacterResources.Interfaces;
-using MainGame.Services.Asset;
 using MainGame.Services.Asset.Interfaces;
-using MainGame.Services.Camera;
 using MainGame.Services.Camera.Interfaces;
 using MainGame.StaticData;
 using MainGame.Stats.Interfaces;

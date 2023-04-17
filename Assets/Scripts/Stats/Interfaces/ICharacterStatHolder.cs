@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MainGame.Stats.Interfaces
+﻿namespace MainGame.Stats.Interfaces
 {
     public interface ICharacterStatHolder
     {
