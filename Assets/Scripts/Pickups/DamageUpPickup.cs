@@ -1,4 +1,5 @@
 ﻿using MainGame.Stats;
+using MainGame.Stats.Interfaces;
 using UnityEngine;
 
 namespace MainGame.Pickups

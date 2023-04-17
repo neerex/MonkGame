@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using MainGame.Services.Asset.Interfaces;
 using UnityEngine;
 
 namespace MainGame.Services.Asset

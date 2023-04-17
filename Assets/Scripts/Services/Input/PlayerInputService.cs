@@ -1,4 +1,5 @@
 ﻿using System;
+using MainGame.Services.Input.Interfaces;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

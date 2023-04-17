@@ -1,7 +1,12 @@
 using Cysharp.Threading.Tasks;
+using MainGame.CharacterResources.Interfaces;
 using MainGame.Services.Asset;
+using MainGame.Services.Asset.Interfaces;
 using MainGame.Services.Camera;
+using MainGame.Services.Camera.Interfaces;
 using MainGame.StaticData;
+using MainGame.Stats.Interfaces;
+using MainGame.UI;
 using UnityEngine;
 using Zenject;
 
@@ -23,9 +28,26 @@ namespace MainGame.Services.Bootstrap
 
         private async UniTaskVoid Start()
         {
-            GameObject player = await _injectedAssetProvider.Instantiate(PrefabAddresses.Player, Vector3.zero);
+            // remove this into bootstrap statemachine
+            
             await _cameraService.SpawnCameraRig(Vector3.zero);
+            GameObject player = await InitializePlayer();
             _cameraService.SetFollow(player.transform);
+        }
+
+        private async UniTask<GameObject> InitializePlayer()
+        {
+            GameObject player = await _injectedAssetProvider.Instantiate(PrefabAddresses.Player, Vector3.zero);
+            player.GetComponent<ICharacterStatHolder>().InitializeStatLibrary();
+            foreach (IStatsReader statReader in player.GetComponentsInChildren<IStatsReader>())
+            {
+                statReader.InitializeStats();
+            }
+
+            var playerHealth = player.GetComponent<IHealth>();
+            player.GetComponentInChildren<ActorUI>().Construct(playerHealth);
+            
+            return player;
         }
     }
 }

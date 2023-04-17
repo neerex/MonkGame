@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using UnityEngine;
+using Logger = MainGame.Utilities.Logger;
 
 namespace MainGame.Stats
 {
@@ -18,14 +20,7 @@ namespace MainGame.Stats
 			{
 				if (!_isDirty) return _value;
 				CalculateFinalValue();
-				_isDirty = false;
-				ValueChanged?.Invoke(_value);
 				return _value;
-			}
-			private set
-			{
-				_value = value;
-				ValueChanged?.Invoke(_value);
 			}
 		}
 
@@ -88,7 +83,10 @@ namespace MainGame.Stats
 				finalValue = mod.Calculate(finalValue);
 			}
 			
-			Value = finalValue;
+			_value = finalValue;
+			_isDirty = false;
+			Logger.Log($"CurrMax :{_value}", GetType().Name, Color.cyan);
+			ValueChanged?.Invoke(_value);
 		}
     }
 }

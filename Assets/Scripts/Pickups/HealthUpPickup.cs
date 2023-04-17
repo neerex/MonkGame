@@ -1,4 +1,5 @@
 ﻿using MainGame.Stats;
+using MainGame.Stats.Interfaces;
 using UnityEngine;
 
 namespace MainGame.Pickups
@@ -12,7 +13,7 @@ namespace MainGame.Pickups
         {
             if (go.TryGetComponent(out ICharacterStatHolder statHolder))
             {
-                if(statHolder.GetStat(out HealthStat damageStat))
+                if(statHolder.GetStat(out MaxHealthStat healthStat))
                 {
                     var modifier1 = new StatModifier<float>(_addFlatHealth, 
                         StatModifierType.Flat, 
@@ -24,8 +25,8 @@ namespace MainGame.Pickups
                         (a, b) => a * (1 + b), 
                         this);
                     
-                    damageStat.AddModifier(modifier1);
-                    damageStat.AddModifier(modifier2);
+                    healthStat.AddModifier(modifier1);
+                    healthStat.AddModifier(modifier2);
                 }
             }
         }

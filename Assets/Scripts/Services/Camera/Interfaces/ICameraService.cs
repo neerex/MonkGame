@@ -2,7 +2,7 @@
 using MainGame.Camera;
 using UnityEngine;
 
-namespace MainGame.Services.Camera
+namespace MainGame.Services.Camera.Interfaces
 {
     public interface ICameraService
     {

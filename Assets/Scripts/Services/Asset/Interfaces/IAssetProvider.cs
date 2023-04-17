@@ -1,7 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace MainGame.Services.Asset
+namespace MainGame.Services.Asset.Interfaces
 {
     public interface IAssetProvider
     {

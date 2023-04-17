@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MainGame.Services.Raycast
+namespace MainGame.Services.Raycast.Interfaces
 {
     public interface IMouseRaycastService
     {
