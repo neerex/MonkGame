@@ -40,7 +40,7 @@ namespace MainGame.CharacterResources
                 _maxHealthStat.ValueChanged -= OnMaxValueChanged;
         }
 
-        public void InitializeStats()
+        void IStatsReader.InitializeStats()
         {
             _characterStatHolder.GetStat(out _maxHealthStat);
             Current = Max;

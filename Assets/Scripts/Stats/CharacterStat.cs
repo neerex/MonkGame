@@ -60,7 +60,7 @@ namespace MainGame.Stats
 		public void RemoveAllModifiersFromSource(object source)
 		{
 			int numRemovals = 0;
-			var modifiersToRemove = _statModifiers.Where(m => m.Source == source);
+			IEnumerable<StatModifier<T>> modifiersToRemove = _statModifiers.Where(m => m.Source == source);
 			foreach (var modifier in modifiersToRemove)
 			{
 				RemoveModifier(modifier);

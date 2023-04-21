@@ -15,14 +15,14 @@ namespace MainGame.Player
         
         private readonly Dictionary<Type, object> _statsDict = new();
 
-        public void InitializeStatLibrary()
+        void ICharacterStatHolder.InitializeStatLibrary()
         {
             _statsDict.Add(typeof(MaxHealthStat), new MaxHealthStat(_playerDefaultStats.Health));
             _statsDict.Add(typeof(DamageStat), new DamageStat(_playerDefaultStats.Damage));
             _statsDict.Add(typeof(MovementSpeedStat), new MovementSpeedStat(_playerDefaultStats.MovementSpeed));
         }
 
-        public bool GetStat<T>(out T stat)
+        bool ICharacterStatHolder.GetStat<T>(out T stat)
         {
             if(_statsDict.TryGetValue(typeof(T), out object s))
             {

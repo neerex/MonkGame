@@ -2,6 +2,7 @@
 
 namespace MainGame.Collisions.Triggers
 {
+    [RequireComponent(typeof(BoxCollider))]
     public class BoxTriggerObserver : TriggerObserver
     {
         private BoxCollider _boxCollider;

@@ -33,6 +33,7 @@ namespace MainGame.Services.Bootstrap
             _cameraService.SetFollow(player.transform);
         }
 
+        // temporary here
         private async UniTask<GameObject> InitializePlayer()
         {
             GameObject player = await _injectedAssetProvider.Instantiate(PrefabAddresses.Player, Vector3.zero);
