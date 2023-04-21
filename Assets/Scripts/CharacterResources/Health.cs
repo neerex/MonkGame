@@ -2,6 +2,7 @@
 using MainGame.CharacterResources.Interfaces;
 using MainGame.Stats;
 using MainGame.Stats.Interfaces;
+using MainGame.Utilities;
 using NaughtyAttributes;
 using UnityEngine;
 using Logger = MainGame.Utilities.Logger;
@@ -26,7 +27,7 @@ namespace MainGame.CharacterResources
             }
         }
 
-        public event Action<float, float> ValueChanged;
+        public event ValueChangedDelegate<float> ValueChanged;
 
         private void Awake()
         {
@@ -35,7 +36,8 @@ namespace MainGame.CharacterResources
 
         private void OnDestroy()
         {
-            if(_maxHealthStat != null) _maxHealthStat.ValueChanged -= OnMaxValueChanged;
+            if(_maxHealthStat != null) 
+                _maxHealthStat.ValueChanged -= OnMaxValueChanged;
         }
 
         public void InitializeStats()
@@ -45,7 +47,7 @@ namespace MainGame.CharacterResources
             _maxHealthStat.ValueChanged += OnMaxValueChanged;
         }
 
-        [Button("Take Damage")] public void Damage() => TakeDamage(10);
+        [Button("Take Damage")] public void Damage() => TakeDamage(100);
         [Button("Heal")] public void Heal() => Heal(15);
 
         public void TakeDamage(float amount) => 
@@ -64,7 +66,7 @@ namespace MainGame.CharacterResources
             Logger.Log($"Current Health: {Current}", gameObject, Color.green);
         }
         
-        private void OnMaxValueChanged(float newValue) => 
+        private void OnMaxValueChanged(float oldValue, float newValue) => 
             ValueChanged?.Invoke(Current, Current);
     }
 }

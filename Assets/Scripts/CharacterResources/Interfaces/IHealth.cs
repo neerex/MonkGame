@@ -1,4 +1,4 @@
-﻿using System;
+﻿using MainGame.Utilities;
 
 namespace MainGame.CharacterResources.Interfaces
 {
@@ -8,7 +8,7 @@ namespace MainGame.CharacterResources.Interfaces
         float Max { get; }
         
         /// <summary> <b>Old value</b> and <b>NewValue</b> </summary>
-        event Action<float, float> ValueChanged;
+        event ValueChangedDelegate<float> ValueChanged;
         
         void TakeDamage(float amount);
         void Heal(float amount);

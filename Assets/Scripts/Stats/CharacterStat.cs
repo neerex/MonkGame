@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using MainGame.Utilities;
 using UnityEngine;
 using Logger = MainGame.Utilities.Logger;
 
 namespace MainGame.Stats
 {
-    public abstract class CharacterStat<T>
+	public abstract class CharacterStat<T>
     {
 	    private readonly T _baseValue;
 
@@ -29,7 +30,7 @@ namespace MainGame.Stats
 		
 		public event Action<StatModifier<T>> ModifierAdded;
 		public event Action<StatModifier<T>> ModifierRemoved;
-		public event Action<T> ValueChanged;
+		public event ValueChangedDelegate<T> ValueChanged;
 
 		protected CharacterStat(T baseValue)
 		{
@@ -75,6 +76,7 @@ namespace MainGame.Stats
 
 		private void CalculateFinalValue()
 		{
+			T oldValue = _value;
 			T finalValue = _baseValue;
 			_statModifiers.Sort();
 
@@ -86,7 +88,7 @@ namespace MainGame.Stats
 			_value = finalValue;
 			_isDirty = false;
 			Logger.Log($"CurrMax :{_value}", GetType().Name, Color.cyan);
-			ValueChanged?.Invoke(_value);
+			ValueChanged?.Invoke(oldValue, _value);
 		}
     }
 }
