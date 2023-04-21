@@ -16,9 +16,10 @@ namespace MainGame.Player
         [SerializeField] private float _rotationSpeed = 10f;
         
         private Rigidbody _rigidbody;
+        private ICharacterStatHolder _characterStatHolder;
+        
         private IPlayerInputService _inputService;
         private IMouseRaycastService _mouseRaycastService;
-        private ICharacterStatHolder _characterStatHolder;
 
         private MovementSpeedStat _movementSpeed;
 
@@ -37,7 +38,6 @@ namespace MainGame.Player
             _characterStatHolder = GetComponent<ICharacterStatHolder>();
         }
         
-
         private void OnDestroy()
         {
             _inputService.OnJumpInputPerformed -= Jump;
