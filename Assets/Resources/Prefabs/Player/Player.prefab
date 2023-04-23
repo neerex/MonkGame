@@ -573,6 +573,7 @@ GameObject:
   - component: {fileID: 835678943273033497}
   - component: {fileID: 3234205239824574914}
   - component: {fileID: 2529900144568076414}
+  - component: {fileID: 3107499122281100688}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -667,6 +668,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10a80bcdc5b429fb2d3c1a41f89bfe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3107499122281100688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7382323913642961003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2feaec9694b4df149b2c49c9ee57df9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 3301236650415399757}
+  _rigidbody: {fileID: 7382323913642960994}
 --- !u!1 &7751216129401906362
 GameObject:
   m_ObjectHideFlags: 0
@@ -884,8 +899,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monk
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 3eba15424b58aab40bbd462c8ca5c55d,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 58105fbe61fa34e4398385be8049fd7a, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 3eba15424b58aab40bbd462c8ca5c55d,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eba15424b58aab40bbd462c8ca5c55d, type: 3}
+--- !u!95 &3301236650415399757 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 3eba15424b58aab40bbd462c8ca5c55d,
+    type: 3}
+  m_PrefabInstance: {fileID: 8987720958777368284}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8105253675327234957 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3eba15424b58aab40bbd462c8ca5c55d,
