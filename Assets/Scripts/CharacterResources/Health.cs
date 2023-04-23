@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using MainGame.CharacterResources.Interfaces;
 using MainGame.Stats;
 using MainGame.Stats.Interfaces;
@@ -47,8 +48,25 @@ namespace MainGame.CharacterResources
             _maxHealthStat.ValueChanged += OnMaxValueChanged;
         }
 
-        [Button("Take Damage")] public void Damage() => TakeDamage(100);
-        [Button("Heal")] public void Heal() => Heal(15);
+        [Button("Take Damage")] 
+        public IEnumerator Damage()
+        {
+            for (float i = 0; i < 10; i++)
+            {
+                TakeDamage(10);
+                yield return new WaitForSeconds(0.2f);
+            }
+        }
+
+        [Button("Heal")] 
+        public IEnumerator Heal()
+        {
+            for (float i = 0; i < 10; i++)
+            {
+                Heal(15);
+                yield return new WaitForSeconds(0.2f);
+            }
+        }
 
         public void TakeDamage(float amount) => 
             ChangeCurrentHealthValue(-amount);
@@ -61,9 +79,11 @@ namespace MainGame.CharacterResources
             float oldValue = Current;
             Current += amount;
             Current = Math.Clamp(Current, 0, _maxHealthStat.Value);
-            ValueChanged?.Invoke(oldValue, Current);
-            
-            Logger.Log($"Current Health: {Current}", gameObject, Color.green);
+            if (!Mathf.Approximately(oldValue, Current))
+            {
+                ValueChanged?.Invoke(oldValue, Current);
+                Logger.Log($"Current Health: {Current}", gameObject, Color.green);
+            }
         }
         
         private void OnMaxValueChanged(float oldValue, float newValue) => 
