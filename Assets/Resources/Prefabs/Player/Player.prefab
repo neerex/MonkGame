@@ -716,6 +716,7 @@ MonoBehaviour:
   _animator: {fileID: 3301236650415399757}
   _rigidbody: {fileID: 7382323913642960994}
   _groundProvider: {fileID: 2509023607728981174}
+  _animationSmooth: 0.06
 --- !u!114 &2509023607728981174
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using MainGame.Services.Input.Interfaces;
 using MainGame.Stats;
 using MainGame.Stats.Interfaces;
@@ -23,10 +24,21 @@ namespace MainGame.Player.Animation
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private IsGroundProvider _groundProvider;
 
+        [SerializeField] [Range(0.01f, 0.3f)] private float _animationSmooth = 0.07f;
+        
+
         private ICharacterStatHolder _characterStatHolder;
         private IPlayerInputService _inputService;
         
         private MovementSpeedStat _movementSpeed;
+
+        private float _currentPercentSpeedBlendValue;
+        private float _refSpeedPercent;
+        
+        private Vector2 _currentVelocityBlendValue;
+        private Vector2 _refVelocity;
+        
+        private float _directionAngle;
 
         [Inject]
         public void Construct(IPlayerInputService inputService)
@@ -45,7 +57,7 @@ namespace MainGame.Player.Animation
         {
             if(_movementSpeed == null || _inputService == null) return;
             _animator.SetBool(_isGrounded, _groundProvider.IsGround);
-            float speedPercent = GetSpeedPercent();
+            float speedPercent = GetSmoothSpeedPercent();
             SetWalkDirectionFromAngle(AngleBetweenLookAndVelocity(), speedPercent);
             _animator.SetFloat(_walkingSpeed, speedPercent , 0.1f, Time.deltaTime);
         }
@@ -64,17 +76,37 @@ namespace MainGame.Player.Animation
                 _animator.SetTrigger(_jumpTrigger);
         }
 
-        private float AngleBetweenLookAndVelocity() => 
-            Vector3.SignedAngle(transform.forward.FlatY(), _inputService.GetInputDirection(), Vector3.up);
+        private float AngleBetweenLookAndVelocity()
+        {
+            var inputDirection = _inputService.GetInputDirection();
+            if (inputDirection == Vector3.zero) return _directionAngle;
+            _directionAngle = Vector3.SignedAngle(transform.forward.FlatY(), inputDirection, Vector3.up);
+            return _directionAngle;
+        }
 
-        private float GetSpeedPercent() => 
-            _rigidbody.velocity.FlatY().magnitude / _movementSpeed.Value;
+        private float GetSmoothSpeedPercent()
+        {
+            float target = _rigidbody.velocity.FlatY().magnitude / _movementSpeed.Value;
+            
+            _currentPercentSpeedBlendValue = Mathf.SmoothDamp(_currentPercentSpeedBlendValue, 
+                target, 
+                ref _refSpeedPercent, 
+                _animationSmooth);
+            
+            return _currentPercentSpeedBlendValue;
+        }
 
         private void SetWalkDirectionFromAngle(float angle, float speed)
         {
-            var velocity = Quaternion.AngleAxis(-angle, Vector3.forward) * Vector3.up * speed;
-            _animator.SetFloat(_velocityX, velocity.x);
-            _animator.SetFloat(_velocityY, velocity.y);
+            Vector2 desiredVelocity = Quaternion.AngleAxis(-angle, Vector3.forward) * Vector3.up * speed;
+            
+            _currentVelocityBlendValue = Vector2.SmoothDamp(_currentVelocityBlendValue, 
+                desiredVelocity, 
+                ref _refVelocity,
+                _animationSmooth);
+            
+            _animator.SetFloat(_velocityX, _currentVelocityBlendValue.x);
+            _animator.SetFloat(_velocityY, _currentVelocityBlendValue.y);
         }
     }
 }
