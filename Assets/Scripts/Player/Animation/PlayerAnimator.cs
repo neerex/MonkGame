@@ -48,7 +48,7 @@ namespace MainGame.Player.Animation
 
         private void Update()
         {
-            if(_movementSpeed == null && _inputService == null) return;
+            if(_movementSpeed == null || _inputService == null) return;
             SetWalkDirectionFromAngle(AngleBetweenLookAndVelocity());
             
             _animator.SetFloat(_walkingSpeedHash, GetSpeedPercent(), 0.1f, Time.deltaTime);
