@@ -5,11 +5,13 @@ using MainGame.Stats.Interfaces;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
+using Logger = MainGame.Utilities.Logger;
 
 namespace MainGame.Player
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(ICharacterStatHolder))]
+    [RequireComponent(typeof(IsGroundProvider))]
     public class PlayerMovement : MonoBehaviour, IStatsReader
     {
         [SerializeField] private float _jumpSpeed = 5f;
@@ -17,6 +19,7 @@ namespace MainGame.Player
         
         private Rigidbody _rigidbody;
         private ICharacterStatHolder _characterStatHolder;
+        private IsGroundProvider _isGroundProvider;
         
         private IPlayerInputService _inputService;
         private IMouseRaycastService _mouseRaycastService;
@@ -36,6 +39,7 @@ namespace MainGame.Player
         {
             _rigidbody = GetComponent<Rigidbody>();
             _characterStatHolder = GetComponent<ICharacterStatHolder>();
+            _isGroundProvider = GetComponent<IsGroundProvider>();
         }
         
         private void OnDestroy()
@@ -63,7 +67,8 @@ namespace MainGame.Player
 
         private void Jump(InputAction.CallbackContext callbackContext)
         {
-            _rigidbody.velocity += Vector3.up * _jumpSpeed;
+            if(_isGroundProvider.IsGround)
+                _rigidbody.velocity += Vector3.up * _jumpSpeed;
         }
 
         private void LookAtCursor()

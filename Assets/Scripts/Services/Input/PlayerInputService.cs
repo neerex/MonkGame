@@ -18,6 +18,7 @@ namespace MainGame.Services.Input
             SubscribeOnInputCallbacks();
         }
         
+        // ReSharper disable Unity.PerformanceAnalysis
         public Vector3 GetInputDirection()
         {
             var movementVector = _gameInput.Gameplay.Movement.ReadValue<Vector2>();
@@ -26,6 +27,7 @@ namespace MainGame.Services.Input
             return direction;
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         public Vector2 GetMousePosition() => 
             _gameInput.Gameplay.MousePosition.ReadValue<Vector2>();
 
