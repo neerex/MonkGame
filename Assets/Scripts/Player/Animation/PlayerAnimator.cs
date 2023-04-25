@@ -72,7 +72,7 @@ namespace MainGame.Player.Animation
 
         private void StartJumpAnimation(InputAction.CallbackContext context)
         {
-            if(_groundProvider != null && _groundProvider.IsGround)
+            if(_groundProvider.IsGround)
                 _animator.SetTrigger(_jumpTrigger);
         }
 
