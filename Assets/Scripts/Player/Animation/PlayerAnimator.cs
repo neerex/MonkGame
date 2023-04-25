@@ -1,4 +1,3 @@
-using System;
 using MainGame.Services.Input.Interfaces;
 using MainGame.Stats;
 using MainGame.Stats.Interfaces;
@@ -27,7 +26,6 @@ namespace MainGame.Player.Animation
         [SerializeField] private IsGroundProvider _groundProvider;
 
         [SerializeField] [Range(0.01f, 0.3f)] private float _animationSmooth = 0.07f;
-        
 
         private ICharacterStatHolder _characterStatHolder;
         private IPlayerInputService _inputService;

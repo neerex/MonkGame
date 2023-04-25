@@ -5,7 +5,6 @@ using MainGame.Stats.Interfaces;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
-using Logger = MainGame.Utilities.Logger;
 
 namespace MainGame.Player
 {
