@@ -12,13 +12,15 @@ namespace MainGame.Player.Animation
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(ICharacterStatHolder))]
     [RequireComponent(typeof(IsGroundProvider))]
+    [RequireComponent(typeof(Animator))]
     public class PlayerAnimator : MonoBehaviour, IStatsReader
     {
         private readonly int _walkingSpeed = Animator.StringToHash("SpeedPercent");
         private readonly int _velocityX = Animator.StringToHash("VelocityX");
         private readonly int _velocityY = Animator.StringToHash("VelocityY");
-        private readonly int _jumpTrigger = Animator.StringToHash("Jump");
         private readonly int _isGrounded = Animator.StringToHash("IsGrounded");
+        
+        private readonly int _jumpAnimationHash = Animator.StringToHash("Jump");
         
         [SerializeField] private Animator _animator;
         [SerializeField] private Rigidbody _rigidbody;
@@ -51,15 +53,16 @@ namespace MainGame.Player.Animation
         {
             _characterStatHolder = GetComponent<ICharacterStatHolder>();
             _groundProvider = GetComponent<IsGroundProvider>();
+            _animator = GetComponent<Animator>();
         }
 
         private void Update()
         {
             if(_movementSpeed == null || _inputService == null) return;
             _animator.SetBool(_isGrounded, _groundProvider.IsGround);
-            float speedPercent = GetSmoothSpeedPercent();
-            SetWalkDirectionFromAngle(AngleBetweenLookAndVelocity(), speedPercent);
-            _animator.SetFloat(_walkingSpeed, speedPercent , 0.1f, Time.deltaTime);
+            float smoothSpeedPercent = GetSmoothSpeedPercent();
+            SetWalkDirectionFromAngle(AngleBetweenLookAndVelocity(), smoothSpeedPercent);
+            _animator.SetFloat(_walkingSpeed, smoothSpeedPercent , 0.1f, Time.deltaTime);
         }
 
         private void OnDestroy()
@@ -72,8 +75,10 @@ namespace MainGame.Player.Animation
 
         private void StartJumpAnimation(InputAction.CallbackContext context)
         {
-            if(_groundProvider.IsGround)
-                _animator.SetTrigger(_jumpTrigger);
+            if (_groundProvider.IsGround)
+            {
+                _animator.CrossFade(_jumpAnimationHash, 0.15f);
+            }
         }
 
         private float AngleBetweenLookAndVelocity()
