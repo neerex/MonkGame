@@ -5,6 +5,9 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: -4225938145651474181
+    second: Fall01
+  - first:
+      74: -4225938145651474181
     second: BasicMotions@Fall01
   externalObjects: {}
   materials:

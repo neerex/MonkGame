@@ -5,6 +5,7 @@ using MainGame.Utilities;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
+using Logger = MainGame.Utilities.Logger;
 
 namespace MainGame.Player.Animation
 {
@@ -20,6 +21,9 @@ namespace MainGame.Player.Animation
         private readonly int _isGrounded = Animator.StringToHash("IsGrounded");
         
         private readonly int _jumpAnimationHash = Animator.StringToHash("Jump");
+        private readonly int _attack1AnimationHash = Animator.StringToHash("Attack1");
+        private readonly int _attack2AnimationHash = Animator.StringToHash("Attack2");
+        private readonly int _attack3AnimationHash = Animator.StringToHash("Attack3");
         
         [SerializeField] private Animator _animator;
         [SerializeField] private Rigidbody _rigidbody;
@@ -61,6 +65,21 @@ namespace MainGame.Player.Animation
             float smoothSpeedPercent = GetSmoothSpeedPercent();
             SetWalkDirectionFromAngle(AngleBetweenLookAndVelocity(), smoothSpeedPercent);
             _animator.SetFloat(_walkingSpeed, smoothSpeedPercent , 0.1f, Time.deltaTime);
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                _animator.CrossFade(_attack1AnimationHash, _animationSmooth);
+            }
+            
+            if (Input.GetMouseButtonDown(1))
+            {
+                _animator.CrossFade(_attack2AnimationHash, _animationSmooth);
+            }
+            
+            if (Input.GetMouseButtonDown(3))
+            {
+                _animator.CrossFade(_attack3AnimationHash, _animationSmooth);
+            }
         }
 
         private void OnDestroy()

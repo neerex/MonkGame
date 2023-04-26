@@ -608,6 +608,7 @@ GameObject:
   - component: {fileID: 2529900144568076414}
   - component: {fileID: 3107499122281100688}
   - component: {fileID: 2509023607728981174}
+  - component: {fileID: 3564210377730167863}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -749,10 +750,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2feaec9694b4df149b2c49c9ee57df9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 0}
+  _animator: {fileID: 5121919513240586356}
   _rigidbody: {fileID: 7382323913642960994}
   _groundProvider: {fileID: 2509023607728981174}
-  _animationSmooth: 0.06
+  _animationSmooth: 0.07
 --- !u!114 &2509023607728981174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -770,6 +771,18 @@ MonoBehaviour:
     m_Bits: 384
   _footTransform: {fileID: 6920963001091667729}
   _groundCheckBoxSize: {x: 0.6, y: 0.3, z: 0.4}
+--- !u!114 &3564210377730167863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7382323913642961003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e32a883eee1ce644ea2662a4990397de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7751216129401906362
 GameObject:
   m_ObjectHideFlags: 0
