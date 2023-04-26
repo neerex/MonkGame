@@ -5,7 +5,6 @@ using MainGame.Utilities;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
-using Logger = MainGame.Utilities.Logger;
 
 namespace MainGame.Player.Animation
 {
@@ -21,9 +20,13 @@ namespace MainGame.Player.Animation
         private readonly int _isGrounded = Animator.StringToHash("IsGrounded");
         
         private readonly int _jumpAnimationHash = Animator.StringToHash("Jump");
+        
+        private readonly int _mainAttackAnimationHash = Animator.StringToHash("MainAttack");
+        private readonly int _secondaryAttackAnimationHash = Animator.StringToHash("SecondaryAttack");
         private readonly int _attack1AnimationHash = Animator.StringToHash("Attack1");
         private readonly int _attack2AnimationHash = Animator.StringToHash("Attack2");
         private readonly int _attack3AnimationHash = Animator.StringToHash("Attack3");
+        private readonly int _attack4AnimationHash = Animator.StringToHash("Attack4");
         
         [SerializeField] private Animator _animator;
         [SerializeField] private Rigidbody _rigidbody;
@@ -65,21 +68,6 @@ namespace MainGame.Player.Animation
             float smoothSpeedPercent = GetSmoothSpeedPercent();
             SetWalkDirectionFromAngle(AngleBetweenLookAndVelocity(), smoothSpeedPercent);
             _animator.SetFloat(_walkingSpeed, smoothSpeedPercent , 0.1f, Time.deltaTime);
-
-            if (Input.GetMouseButtonDown(0))
-            {
-                _animator.CrossFade(_attack1AnimationHash, _animationSmooth);
-            }
-            
-            if (Input.GetMouseButtonDown(1))
-            {
-                _animator.CrossFade(_attack2AnimationHash, _animationSmooth);
-            }
-            
-            if (Input.GetMouseButtonDown(3))
-            {
-                _animator.CrossFade(_attack3AnimationHash, _animationSmooth);
-            }
         }
 
         private void OnDestroy()
@@ -87,14 +75,18 @@ namespace MainGame.Player.Animation
             _inputService.OnJumpInputPerformed -= StartJumpAnimation;
         }
 
-        public void InitializeStats() => 
-            _characterStatHolder.GetStat(out _movementSpeed);
+        public void PlayMainAttack() => _animator.CrossFade(_mainAttackAnimationHash, _animationSmooth);
+        public void PlaySecondaryAttack() => _animator.CrossFade(_secondaryAttackAnimationHash, _animationSmooth);
+        public void PlayAttackSlot1() => _animator.CrossFade(_attack1AnimationHash, _animationSmooth);
+
+
+        public void InitializeStats() => _characterStatHolder.GetStat(out _movementSpeed);
 
         private void StartJumpAnimation(InputAction.CallbackContext context)
         {
             if (_groundProvider.IsGround)
             {
-                _animator.CrossFade(_jumpAnimationHash, 0.15f);
+                _animator.CrossFade(_jumpAnimationHash, _animationSmooth);
             }
         }
 

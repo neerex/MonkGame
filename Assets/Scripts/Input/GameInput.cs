@@ -53,6 +53,60 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MainAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""286613f4-4501-4ede-96ad-4b58d84cbdad"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SecondaryAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""495737c8-b91c-422d-b608-38f9c3a8114f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack1"",
+                    ""type"": ""Button"",
+                    ""id"": ""df9848c5-c231-4376-be4a-eb4af0967f15"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack2"",
+                    ""type"": ""Button"",
+                    ""id"": ""4a30a4a1-32a2-4f7c-a64b-6c3e4c0bf20d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack3"",
+                    ""type"": ""Button"",
+                    ""id"": ""aa16ea7c-c0ff-4fe6-b9a2-9004f1e88b7c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack4"",
+                    ""type"": ""Button"",
+                    ""id"": ""63e87d0a-7fd2-429b-ae6e-429c5f9f51fa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -187,6 +241,72 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e24b02c4-dc36-4221-bc11-db7155e4943f"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MainAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""98d6a305-2bf7-4926-bb75-1fe3c6635b0c"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SecondaryAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b2eb018e-514c-4cef-9d0b-f062b1c5483b"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b33ba453-57de-4e11-8015-f47f1f3d9e06"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9de36d40-d085-409b-add6-368367d9fcfd"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9149d0f8-d046-47ad-a916-f0ad91118e40"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -198,6 +318,12 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_MousePosition = m_Gameplay.FindAction("MousePosition", throwIfNotFound: true);
+        m_Gameplay_MainAttack = m_Gameplay.FindAction("MainAttack", throwIfNotFound: true);
+        m_Gameplay_SecondaryAttack = m_Gameplay.FindAction("SecondaryAttack", throwIfNotFound: true);
+        m_Gameplay_Attack1 = m_Gameplay.FindAction("Attack1", throwIfNotFound: true);
+        m_Gameplay_Attack2 = m_Gameplay.FindAction("Attack2", throwIfNotFound: true);
+        m_Gameplay_Attack3 = m_Gameplay.FindAction("Attack3", throwIfNotFound: true);
+        m_Gameplay_Attack4 = m_Gameplay.FindAction("Attack4", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -260,6 +386,12 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Movement;
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_MousePosition;
+    private readonly InputAction m_Gameplay_MainAttack;
+    private readonly InputAction m_Gameplay_SecondaryAttack;
+    private readonly InputAction m_Gameplay_Attack1;
+    private readonly InputAction m_Gameplay_Attack2;
+    private readonly InputAction m_Gameplay_Attack3;
+    private readonly InputAction m_Gameplay_Attack4;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
@@ -267,6 +399,12 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Gameplay_Movement;
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @MousePosition => m_Wrapper.m_Gameplay_MousePosition;
+        public InputAction @MainAttack => m_Wrapper.m_Gameplay_MainAttack;
+        public InputAction @SecondaryAttack => m_Wrapper.m_Gameplay_SecondaryAttack;
+        public InputAction @Attack1 => m_Wrapper.m_Gameplay_Attack1;
+        public InputAction @Attack2 => m_Wrapper.m_Gameplay_Attack2;
+        public InputAction @Attack3 => m_Wrapper.m_Gameplay_Attack3;
+        public InputAction @Attack4 => m_Wrapper.m_Gameplay_Attack4;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -285,6 +423,24 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                 @MousePosition.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMousePosition;
                 @MousePosition.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMousePosition;
                 @MousePosition.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMousePosition;
+                @MainAttack.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMainAttack;
+                @MainAttack.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMainAttack;
+                @MainAttack.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMainAttack;
+                @SecondaryAttack.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSecondaryAttack;
+                @SecondaryAttack.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSecondaryAttack;
+                @SecondaryAttack.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSecondaryAttack;
+                @Attack1.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack1;
+                @Attack1.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack1;
+                @Attack1.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack1;
+                @Attack2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack2;
+                @Attack2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack2;
+                @Attack2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack2;
+                @Attack3.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack3;
+                @Attack3.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack3;
+                @Attack3.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack3;
+                @Attack4.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack4;
+                @Attack4.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack4;
+                @Attack4.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack4;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -298,6 +454,24 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                 @MousePosition.started += instance.OnMousePosition;
                 @MousePosition.performed += instance.OnMousePosition;
                 @MousePosition.canceled += instance.OnMousePosition;
+                @MainAttack.started += instance.OnMainAttack;
+                @MainAttack.performed += instance.OnMainAttack;
+                @MainAttack.canceled += instance.OnMainAttack;
+                @SecondaryAttack.started += instance.OnSecondaryAttack;
+                @SecondaryAttack.performed += instance.OnSecondaryAttack;
+                @SecondaryAttack.canceled += instance.OnSecondaryAttack;
+                @Attack1.started += instance.OnAttack1;
+                @Attack1.performed += instance.OnAttack1;
+                @Attack1.canceled += instance.OnAttack1;
+                @Attack2.started += instance.OnAttack2;
+                @Attack2.performed += instance.OnAttack2;
+                @Attack2.canceled += instance.OnAttack2;
+                @Attack3.started += instance.OnAttack3;
+                @Attack3.performed += instance.OnAttack3;
+                @Attack3.canceled += instance.OnAttack3;
+                @Attack4.started += instance.OnAttack4;
+                @Attack4.performed += instance.OnAttack4;
+                @Attack4.canceled += instance.OnAttack4;
             }
         }
     }
@@ -307,5 +481,11 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
+        void OnMainAttack(InputAction.CallbackContext context);
+        void OnSecondaryAttack(InputAction.CallbackContext context);
+        void OnAttack1(InputAction.CallbackContext context);
+        void OnAttack2(InputAction.CallbackContext context);
+        void OnAttack3(InputAction.CallbackContext context);
+        void OnAttack4(InputAction.CallbackContext context);
     }
 }

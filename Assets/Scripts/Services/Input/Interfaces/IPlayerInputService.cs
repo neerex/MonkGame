@@ -6,6 +6,13 @@ namespace MainGame.Services.Input.Interfaces
     public interface IPlayerInputService
     {
         event System.Action<InputAction.CallbackContext> OnJumpInputPerformed;
+        event System.Action<InputAction.CallbackContext> OnMainAttackPerformed;
+        event System.Action<InputAction.CallbackContext> OnSecondaryAttackPerformed;
+        event System.Action<InputAction.CallbackContext> OnAttack1Performed;
+        event System.Action<InputAction.CallbackContext> OnAttack2Performed;
+        event System.Action<InputAction.CallbackContext> OnAttack3Performed;
+        event System.Action<InputAction.CallbackContext> OnAttack4Performed;
+        
         Vector3 GetInputDirection();
         Vector2 GetMousePosition();
         void SubscribeOnInputCallbacks();
