@@ -1,6 +1,6 @@
 ﻿namespace MainGame.Stats
 {
-    public class DamageStat : CharacterStat<float>
+    public class DamageStat : ModifiableStat<float>
     {
         public DamageStat(float baseValue) : base(baseValue) { }
     }

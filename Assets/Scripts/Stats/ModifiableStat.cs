@@ -8,7 +8,7 @@ using Logger = MainGame.Utilities.Logger;
 
 namespace MainGame.Stats
 {
-	public abstract class CharacterStat<T>
+	public abstract class ModifiableStat<T>
     {
 	    private readonly T _baseValue;
 
@@ -32,7 +32,7 @@ namespace MainGame.Stats
 		public event Action<StatModifier<T>> ModifierRemoved;
 		public event ValueChangedDelegate<T> ValueChanged;
 
-		protected CharacterStat(T baseValue)
+		protected ModifiableStat(T baseValue)
 		{
 			_baseValue = baseValue;
 			_statModifiers = new List<StatModifier<T>>();

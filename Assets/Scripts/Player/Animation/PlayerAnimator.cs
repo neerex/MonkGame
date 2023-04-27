@@ -78,6 +78,7 @@ namespace MainGame.Player.Animation
         public void PlayMainAttack() => _animator.CrossFade(_mainAttackAnimationHash, _animationSmooth);
         public void PlaySecondaryAttack() => _animator.CrossFade(_secondaryAttackAnimationHash, _animationSmooth);
         public void PlayAttackSlot1() => _animator.CrossFade(_attack1AnimationHash, _animationSmooth);
+        public void PlayerAnimationWithHash(int hash) => _animator.CrossFade(hash, _animationSmooth);
 
 
         public void InitializeStats() => _characterStatHolder.GetStat(out _movementSpeed);

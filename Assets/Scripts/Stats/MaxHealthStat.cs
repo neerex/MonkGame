@@ -1,6 +1,6 @@
 ﻿namespace MainGame.Stats
 {
-    public class MaxHealthStat : CharacterStat<float>
+    public class MaxHealthStat : ModifiableStat<float>
     {
         public MaxHealthStat(float baseValue) : base(baseValue) { }
     }

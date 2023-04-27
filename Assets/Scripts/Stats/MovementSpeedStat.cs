@@ -1,6 +1,6 @@
 ﻿namespace MainGame.Stats
 {
-    public class MovementSpeedStat : CharacterStat<float>
+    public class MovementSpeedStat : ModifiableStat<float>
     {
         public MovementSpeedStat(float baseValue) : base(baseValue)
         {

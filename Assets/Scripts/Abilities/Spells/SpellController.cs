@@ -1,6 +1,7 @@
-using System;
+using System.Collections;
 using MainGame.Player.Animation;
 using MainGame.Services.Input.Interfaces;
+using MainGame.Services.Raycast.Interfaces;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -10,21 +11,23 @@ using Logger = MainGame.Utilities.Logger;
 namespace MainGame.Abilities.Spells
 {
     [RequireComponent(typeof(PlayerAnimator))]
-    public class SpellController : MonoBehaviour
+    public class SpellController : MonoBehaviour, ISpellBookHolder
     {
         [SerializeField] private PlayerAnimator _playerAnimator;
-        private IPlayerInputService _inputService;
         
-        private readonly int[] _spellBook = new int[6];
+        private IPlayerInputService _inputService;
+        private IMouseRaycastService _mouseRaycastService;
+
+        private Spell _currentlyCastingSpell;
         private int _currentSpellIndexToCast = -1;
-
-        public event Action<int[]> OnSpellPositionInTheBookChanged;
-
+        public SpellBook SpellBook { get; private set; }
+        
         [Inject]
-        public void Construct(IPlayerInputService inputService)
+        public void Construct(IPlayerInputService inputService, IMouseRaycastService mouseRaycastService)
         {
             _inputService = inputService;
-
+            _mouseRaycastService = mouseRaycastService;
+            
             _inputService.OnMainAttackPerformed += CastMainSpell;
             _inputService.OnSecondaryAttackPerformed += CastSecondarySpell;
             _inputService.OnAttack1Performed += CastAttack1Spell;
@@ -32,6 +35,7 @@ namespace MainGame.Abilities.Spells
         
         private void Awake()
         {
+            SpellBook = new SpellBook(6);
             _playerAnimator = GetComponent<PlayerAnimator>();
         }
 
@@ -45,31 +49,46 @@ namespace MainGame.Abilities.Spells
         private void CastMainSpell(InputAction.CallbackContext context)
         {
             _currentSpellIndexToCast = 0;
-            _playerAnimator.PlayMainAttack();
+            if(SpellBook[_currentSpellIndexToCast] != null)
+                _playerAnimator.PlayMainAttack();
         }
 
         private void CastSecondarySpell(InputAction.CallbackContext context)
         {
             _currentSpellIndexToCast = 1;
-            _playerAnimator.PlaySecondaryAttack();
+            if(SpellBook[_currentSpellIndexToCast] != null)
+                _playerAnimator.PlaySecondaryAttack();
         }
 
         private void CastAttack1Spell(InputAction.CallbackContext context)
         {
             _currentSpellIndexToCast = 2;
-            _playerAnimator.PlayAttackSlot1();
+            Spell spellToCast = SpellBook[_currentSpellIndexToCast];
+            if (spellToCast != null)
+            {
+                _playerAnimator.PlayerAnimationWithHash(spellToCast.SpellConfig.AnimationHash);
+                _playerAnimator.PlayAttackSlot1();
+            }
         }
 
         //animation event
-        public void CastSpell()
+        public IEnumerator CastSpell()
         {
+            if(_currentlyCastingSpell != null && _currentlyCastingSpell.IsCasting) yield break;
+            if(_currentSpellIndexToCast >= SpellBook.Capacity || SpellBook[_currentSpellIndexToCast] == null) yield break;
+
+            _currentlyCastingSpell = SpellBook[_currentSpellIndexToCast];
+            
+            SpellCastInfo spellCastInfo = new SpellCastInfo()
+            {
+                //todo
+            };
+            yield return _currentlyCastingSpell.BeginCast(spellCastInfo);
+            
+            _currentlyCastingSpell = null;
+            
             Logger.Log($"Cast Spell Number {_currentSpellIndexToCast}", Color.blue);
         }
 
-        public void ChangeSpellPlaces(int indexFrom, int indexTo)
-        {
-            (_spellBook[indexFrom], _spellBook[indexTo]) = (_spellBook[indexTo], _spellBook[indexFrom]);
-            OnSpellPositionInTheBookChanged?.Invoke(_spellBook);
-        }
     }
 }

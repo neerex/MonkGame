@@ -1,5 +1,7 @@
 using MainGame.Services.Asset;
 using MainGame.Services.Asset.Interfaces;
+using MainGame.Services.AsyncRoutine;
+using MainGame.Services.AsyncRoutine.Interfaces;
 using MainGame.Services.Camera;
 using MainGame.Services.Camera.Interfaces;
 using MainGame.Services.Input;
@@ -18,6 +20,7 @@ namespace MainGame.Installers
             BindAssetProvider();
             BindInjectedAssetProvider();
             BindPlayerInputService();
+            BindCoroutineRunner();
             
             //multiple dependencies
             BindCameraService();
@@ -37,6 +40,15 @@ namespace MainGame.Installers
         private void BindPlayerInputService()
         {
             Container.Bind<IPlayerInputService>().To<PlayerInputService>().AsSingle();
+        }
+
+        private void BindCoroutineRunner()
+        {
+            Container.Bind<ICoroutineRunner>()
+                .To<CoroutineRunner>()
+                .FromNewComponentOnNewGameObject()
+                .WithGameObjectName("[COROUTINE RUNNER]")
+                .AsSingle(); 
         }
 
         private void BindMouseRaycastService()
