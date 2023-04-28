@@ -36,8 +36,8 @@ namespace MainGame.Abilities.Spells
         
         private void Awake()
         {
-            SpellBook = new SpellBook(6);
             _playerAnimator = GetComponent<PlayerAnimator>();
+            SpellBook = new SpellBook(6);
         }
 
         private void OnDestroy()
@@ -50,7 +50,7 @@ namespace MainGame.Abilities.Spells
         //animation event
         public IEnumerator CastSpell()
         {
-            if(_currentlyCastingSpell != null && _currentlyCastingSpell.IsCasting) yield break;
+            if(_currentlyCastingSpell != null) yield break;
 
             _currentlyCastingSpell = SpellBook[_currentSpellIndexToCast];
             
@@ -65,23 +65,9 @@ namespace MainGame.Abilities.Spells
             Logger.Log($"Cast Spell Number {_currentSpellIndexToCast}", Color.blue);
         }
 
-        private void CastMainSpell(InputAction.CallbackContext context)
-        {
-            _currentSpellIndexToCast = 0;
-            TryCastSpell(_currentSpellIndexToCast);
-        }
-
-        private void CastSecondarySpell(InputAction.CallbackContext context)
-        {
-            _currentSpellIndexToCast = 1;
-            TryCastSpell(_currentSpellIndexToCast);
-        }
-
-        private void CastAttack1Spell(InputAction.CallbackContext context)
-        {
-            _currentSpellIndexToCast = 2;
-            TryCastSpell(_currentSpellIndexToCast);
-        }
+        private void CastMainSpell(InputAction.CallbackContext context) => TryCastSpell(0);
+        private void CastSecondarySpell(InputAction.CallbackContext context) => TryCastSpell(1);
+        private void CastAttack1Spell(InputAction.CallbackContext context) => TryCastSpell(2);
 
         private void TryCastSpell(int spellBookIndex)
         {
@@ -94,6 +80,7 @@ namespace MainGame.Abilities.Spells
             Spell spellToCast = SpellBook[spellBookIndex];
             if (spellToCast != null)
             {
+                _currentSpellIndexToCast = spellBookIndex;
                 _playerAnimator.PlayerAnimationWithHash(spellToCast.SpellConfig.AnimationHash);
             }
         }

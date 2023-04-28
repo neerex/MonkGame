@@ -68,7 +68,7 @@ namespace MainGame.Player
         private void Jump(InputAction.CallbackContext callbackContext)
         {
             if(_isGroundProvider.IsGround)
-                _rigidbody.velocity += Vector3.up * _jumpSpeed;
+                _rigidbody.AddForce(Vector3.up * _jumpSpeed, ForceMode.VelocityChange);
         }
 
         private void LookAtCursor()
