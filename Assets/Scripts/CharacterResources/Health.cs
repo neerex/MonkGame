@@ -2,6 +2,7 @@
 using System.Collections;
 using MainGame.CharacterResources.Interfaces;
 using MainGame.Stats;
+using MainGame.Stats.ConcreteStat;
 using MainGame.Stats.Interfaces;
 using MainGame.Utilities;
 using NaughtyAttributes;
@@ -10,10 +11,10 @@ using Logger = MainGame.Utilities.Logger;
 
 namespace MainGame.CharacterResources
 {
-    [RequireComponent(typeof(ICharacterStatHolder))]
+    [RequireComponent(typeof(IStatHolder))]
     public class Health : MonoBehaviour, IHealth, IStatsReader
     {
-        private ICharacterStatHolder _characterStatHolder;
+        private IStatHolder _statHolder;
         private MaxHealthStat _maxHealthStat;
         
         public float Current { get; private set; }
@@ -32,7 +33,7 @@ namespace MainGame.CharacterResources
 
         private void Awake()
         {
-            _characterStatHolder = GetComponent<ICharacterStatHolder>();
+            _statHolder = GetComponent<IStatHolder>();
         }
 
         private void OnDestroy()
@@ -43,7 +44,7 @@ namespace MainGame.CharacterResources
 
         void IStatsReader.InitializeStats()
         {
-            _characterStatHolder.GetStat(out _maxHealthStat);
+            _statHolder.GetStat(out _maxHealthStat);
             Current = Max;
             _maxHealthStat.ValueChanged += OnMaxValueChanged;
         }

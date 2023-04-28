@@ -1,5 +1,6 @@
 using MainGame.Services.Input.Interfaces;
 using MainGame.Stats;
+using MainGame.Stats.ConcreteStat;
 using MainGame.Stats.Interfaces;
 using MainGame.Utilities;
 using UnityEngine;
@@ -9,7 +10,7 @@ using Zenject;
 namespace MainGame.Player.Animation
 {
     [RequireComponent(typeof(Rigidbody))]
-    [RequireComponent(typeof(ICharacterStatHolder))]
+    [RequireComponent(typeof(IStatHolder))]
     [RequireComponent(typeof(IsGroundProvider))]
     [RequireComponent(typeof(Animator))]
     public class PlayerAnimator : MonoBehaviour, IStatsReader
@@ -34,7 +35,7 @@ namespace MainGame.Player.Animation
 
         [SerializeField] [Range(0.01f, 0.3f)] private float _animationSmooth = 0.07f;
 
-        private ICharacterStatHolder _characterStatHolder;
+        private IStatHolder _statHolder;
         private IPlayerInputService _inputService;
         
         private MovementSpeedStat _movementSpeed;
@@ -56,7 +57,7 @@ namespace MainGame.Player.Animation
 
         private void Awake()
         {
-            _characterStatHolder = GetComponent<ICharacterStatHolder>();
+            _statHolder = GetComponent<IStatHolder>();
             _groundProvider = GetComponent<IsGroundProvider>();
             _animator = GetComponent<Animator>();
         }
@@ -81,7 +82,7 @@ namespace MainGame.Player.Animation
         public void PlayerAnimationWithHash(int hash) => _animator.CrossFade(hash, _animationSmooth);
 
 
-        public void InitializeStats() => _characterStatHolder.GetStat(out _movementSpeed);
+        public void InitializeStats() => _statHolder.GetStat(out _movementSpeed);
 
         private void StartJumpAnimation(InputAction.CallbackContext context)
         {

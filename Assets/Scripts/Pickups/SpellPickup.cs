@@ -10,9 +10,9 @@ namespace MainGame.Pickups
 
         public override void ApplyEffect(GameObject go)
         {
-            if (go.TryGetComponent(out SpellController spellController))
+            if (go.TryGetComponent(out ISpellBookHolder spellBookHolder))
             {
-                
+                spellBookHolder.SpellBook.TryAddSpell(_spellConfigSo);
             }
         }
     }

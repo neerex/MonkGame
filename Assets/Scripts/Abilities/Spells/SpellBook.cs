@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
 using MainGame.ScriptableConfigs;
-using MainGame.Utilities;
+using UnityEngine;
+using Logger = MainGame.Utilities.Logger;
 
 namespace MainGame.Abilities.Spells
 {
@@ -22,7 +23,7 @@ namespace MainGame.Abilities.Spells
         
         public bool TryAddSpell(SpellConfigSO spellConfig)
         {
-            if (_spells.Any(s => s.SpellConfig == spellConfig))
+            if (_spells.Any(s => s != null && s.SpellConfig == spellConfig))
             {
                 // probably level up spell if pick up same one in the future iteration on this system
                 Logger.Log($"Spell already exist in SpellBook");
@@ -33,6 +34,7 @@ namespace MainGame.Abilities.Spells
             {
                 _spells[index] = new Spell(spellConfig);
                 SpellAdded?.Invoke(this);
+                Logger.Log($"Spell added in SpellBook. SpellName: {spellConfig.name.Replace("Config", "")}", Color.green);
                 return true;
             }
 
@@ -50,7 +52,7 @@ namespace MainGame.Abilities.Spells
             index = -1;
             for (int i = 0; i < _spells.Length; i++)
             {
-                if(_spells[i] == null) 
+                if(_spells[i] != null) 
                     continue;
                 
                 index = i;

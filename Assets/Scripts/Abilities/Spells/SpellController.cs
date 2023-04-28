@@ -13,6 +13,7 @@ namespace MainGame.Abilities.Spells
     [RequireComponent(typeof(PlayerAnimator))]
     public class SpellController : MonoBehaviour, ISpellBookHolder
     {
+        [SerializeField] private Transform _placeToCastFrom;
         [SerializeField] private PlayerAnimator _playerAnimator;
         
         private IPlayerInputService _inputService;
@@ -46,42 +47,16 @@ namespace MainGame.Abilities.Spells
             _inputService.OnAttack1Performed -= CastAttack1Spell;
         }
 
-        private void CastMainSpell(InputAction.CallbackContext context)
-        {
-            _currentSpellIndexToCast = 0;
-            if(SpellBook[_currentSpellIndexToCast] != null)
-                _playerAnimator.PlayMainAttack();
-        }
-
-        private void CastSecondarySpell(InputAction.CallbackContext context)
-        {
-            _currentSpellIndexToCast = 1;
-            if(SpellBook[_currentSpellIndexToCast] != null)
-                _playerAnimator.PlaySecondaryAttack();
-        }
-
-        private void CastAttack1Spell(InputAction.CallbackContext context)
-        {
-            _currentSpellIndexToCast = 2;
-            Spell spellToCast = SpellBook[_currentSpellIndexToCast];
-            if (spellToCast != null)
-            {
-                _playerAnimator.PlayerAnimationWithHash(spellToCast.SpellConfig.AnimationHash);
-                _playerAnimator.PlayAttackSlot1();
-            }
-        }
-
         //animation event
         public IEnumerator CastSpell()
         {
             if(_currentlyCastingSpell != null && _currentlyCastingSpell.IsCasting) yield break;
-            if(_currentSpellIndexToCast >= SpellBook.Capacity || SpellBook[_currentSpellIndexToCast] == null) yield break;
 
             _currentlyCastingSpell = SpellBook[_currentSpellIndexToCast];
             
             SpellCastInfo spellCastInfo = new SpellCastInfo()
             {
-                //todo
+                CasterHandsForward = _placeToCastFrom
             };
             yield return _currentlyCastingSpell.BeginCast(spellCastInfo);
             
@@ -90,5 +65,37 @@ namespace MainGame.Abilities.Spells
             Logger.Log($"Cast Spell Number {_currentSpellIndexToCast}", Color.blue);
         }
 
+        private void CastMainSpell(InputAction.CallbackContext context)
+        {
+            _currentSpellIndexToCast = 0;
+            TryCastSpell(_currentSpellIndexToCast);
+        }
+
+        private void CastSecondarySpell(InputAction.CallbackContext context)
+        {
+            _currentSpellIndexToCast = 1;
+            TryCastSpell(_currentSpellIndexToCast);
+        }
+
+        private void CastAttack1Spell(InputAction.CallbackContext context)
+        {
+            _currentSpellIndexToCast = 2;
+            TryCastSpell(_currentSpellIndexToCast);
+        }
+
+        private void TryCastSpell(int spellBookIndex)
+        {
+            if (spellBookIndex >= SpellBook.Capacity)
+            {
+                Logger.Log("Invalid Index in SpellBook");
+                return;
+            }
+            
+            Spell spellToCast = SpellBook[spellBookIndex];
+            if (spellToCast != null)
+            {
+                _playerAnimator.PlayerAnimationWithHash(spellToCast.SpellConfig.AnimationHash);
+            }
+        }
     }
 }

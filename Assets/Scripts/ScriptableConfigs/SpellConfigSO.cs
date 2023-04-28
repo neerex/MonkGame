@@ -1,15 +1,22 @@
 using System;
-using MainGame.Damage;
+using System.Collections.Generic;
+using MainGame.Abilities.Spells;
 using UnityEngine;
+using MainGame.Stats.ConcreteStat;
 
 namespace MainGame.ScriptableConfigs
 {
     [CreateAssetMenu(fileName = "SpellConfig", menuName = "Spell/SpellConfig")]
     public class SpellConfigSO : ScriptableObject
     {
-        [field: SerializeField] public DamageSource SpellPrefab { get; private set; }
+        [field: SerializeField] public SpellView SpellPrefab { get; private set; }
+        [field: SerializeField] public ParticleSystem MuzzleFlashVfx { get; private set; }
+        [field: SerializeField] public ParticleSystem HitVfx { get; private set; }
         [field: SerializeField] public float Damage { get; private set; }
-        [field: SerializeField] public string AnimationString { get; private set; }
+        [field: SerializeField] public float Knockback { get; private set; }
+        [field: SerializeField] public float ProjectileSpeed { get; private set; }
+        [field: SerializeField] public int Bounce { get; private set; }
+        [field: SerializeField] public string AnimationClipName { get; private set; }
         [field: SerializeField] public SpellCastPosition CastPosition { get; private set; }
         [field: SerializeField] public MovementType MovementType { get; private set; }
         [field: SerializeField] public SpellType SpellType { get; private set; }
@@ -17,7 +24,20 @@ namespace MainGame.ScriptableConfigs
         
         private void OnValidate()
         {
-            AnimationHash = Animator.StringToHash(AnimationString);
+            AnimationHash = Animator.StringToHash(AnimationClipName);
+        }
+        
+        public Dictionary<Type, object> GetStatLibrary()
+        {
+            Dictionary<Type, object> statsDict = new()
+            {
+                {typeof(DamageStat), new DamageStat(Damage)},
+                {typeof(KnockbackStat), new KnockbackStat(Knockback)},
+                {typeof(BounceStat), new BounceStat(Bounce)},
+                {typeof(ProjectileSpeedStat), new ProjectileSpeedStat(ProjectileSpeed)}
+            };
+
+            return statsDict;
         }
     }
 

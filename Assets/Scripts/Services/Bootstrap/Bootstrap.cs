@@ -37,7 +37,7 @@ namespace MainGame.Services.Bootstrap
         private async UniTask<GameObject> InitializePlayer()
         {
             GameObject player = await _injectedAssetProvider.Instantiate(PrefabAddresses.Player, Vector3.zero);
-            player.GetComponent<ICharacterStatHolder>().InitializeStatLibrary();
+            player.GetComponent<IStatHolder>().InitializeStatLibrary();
             foreach (IStatsReader statReader in player.GetComponentsInChildren<IStatsReader>())
             {
                 statReader.InitializeStats();

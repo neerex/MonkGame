@@ -1,4 +1,5 @@
 ﻿using MainGame.Stats;
+using MainGame.Stats.ConcreteStat;
 using MainGame.Stats.Interfaces;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace MainGame.Pickups
         
         public override void ApplyEffect(GameObject go)
         {
-            if (go.TryGetComponent(out ICharacterStatHolder statHolder))
+            if (go.TryGetComponent(out IStatHolder statHolder))
             {
                 if(statHolder.GetStat(out MaxHealthStat healthStat))
                 {

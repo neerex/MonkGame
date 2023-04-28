@@ -12,10 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 973b5d85783d6a74ab696afcdd2450bd, type: 3}
   m_Name: FireballSpellConfig
   m_EditorClassIdentifier: 
-  <SpellPrefab>k__BackingField: {fileID: 0}
-  <Damage>k__BackingField: 0
-  <AnimationString>k__BackingField: MainAttack
+  <SpellPrefab>k__BackingField: {fileID: 2366771280095765877, guid: cada748613df3d3438464c2839eec199,
+    type: 3}
+  <MuzzleFlashVfx>k__BackingField: {fileID: 5487949036051169719, guid: 1f5276bf59e0b514ead370b42f841cea,
+    type: 3}
+  <HitVfx>k__BackingField: {fileID: 5458226936459284193, guid: 7997ae0aae89ffb4b8ed743630807683,
+    type: 3}
+  <Damage>k__BackingField: 10
+  <Knockback>k__BackingField: 5
+  <ProjectileSpeed>k__BackingField: 30
+  <Bounce>k__BackingField: 0
+  <AnimationClipName>k__BackingField: TwoHandsForwardCast
   <CastPosition>k__BackingField: 0
   <MovementType>k__BackingField: 1
   <SpellType>k__BackingField: 0
-  <AnimationHash>k__BackingField: 643134471
+  <AnimationHash>k__BackingField: 2130521034

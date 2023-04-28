@@ -1,6 +1,7 @@
 ﻿using MainGame.Services.Input.Interfaces;
 using MainGame.Services.Raycast.Interfaces;
 using MainGame.Stats;
+using MainGame.Stats.ConcreteStat;
 using MainGame.Stats.Interfaces;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,7 +10,7 @@ using Zenject;
 namespace MainGame.Player
 {
     [RequireComponent(typeof(Rigidbody))]
-    [RequireComponent(typeof(ICharacterStatHolder))]
+    [RequireComponent(typeof(IStatHolder))]
     [RequireComponent(typeof(IsGroundProvider))]
     public class PlayerMovement : MonoBehaviour, IStatsReader
     {
@@ -17,7 +18,7 @@ namespace MainGame.Player
         [SerializeField] private float _rotationSpeed = 10f;
         
         private Rigidbody _rigidbody;
-        private ICharacterStatHolder _characterStatHolder;
+        private IStatHolder _statHolder;
         private IsGroundProvider _isGroundProvider;
         
         private IPlayerInputService _inputService;
@@ -37,7 +38,7 @@ namespace MainGame.Player
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
-            _characterStatHolder = GetComponent<ICharacterStatHolder>();
+            _statHolder = GetComponent<IStatHolder>();
             _isGroundProvider = GetComponent<IsGroundProvider>();
         }
         
@@ -53,7 +54,7 @@ namespace MainGame.Player
         }
 
         public void InitializeStats() => 
-            _characterStatHolder.GetStat(out _movementSpeed);
+            _statHolder.GetStat(out _movementSpeed);
 
         private void Move()
         {

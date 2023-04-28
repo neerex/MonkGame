@@ -1,4 +1,4 @@
-﻿namespace MainGame.Stats
+﻿namespace MainGame.Stats.ConcreteStat
 {
     public class DamageStat : ModifiableStat<float>
     {
