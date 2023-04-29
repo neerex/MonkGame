@@ -1,5 +1,4 @@
 using MainGame.Services.Input.Interfaces;
-using MainGame.Stats;
 using MainGame.Stats.ConcreteStat;
 using MainGame.Stats.Interfaces;
 using MainGame.Utilities;
@@ -7,7 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-namespace MainGame.Player.Animation
+namespace MainGame.Entities.Player.Animation
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(IStatHolder))]

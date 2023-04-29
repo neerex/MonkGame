@@ -1,13 +1,12 @@
 ﻿using MainGame.Services.Input.Interfaces;
 using MainGame.Services.Raycast.Interfaces;
-using MainGame.Stats;
 using MainGame.Stats.ConcreteStat;
 using MainGame.Stats.Interfaces;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-namespace MainGame.Player
+namespace MainGame.Entities.Player
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(IStatHolder))]

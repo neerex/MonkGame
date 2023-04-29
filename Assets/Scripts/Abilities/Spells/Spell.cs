@@ -67,12 +67,27 @@ namespace MainGame.Abilities.Spells
 
         protected virtual IEnumerator CastSpell(SpellCastInfo castInfo)
         {
+            Vector3 pos = SpellConfig.CastPosition switch
+            {
+                SpellCastPosition.FromCastersHands => castInfo.CasterHands.position,
+                SpellCastPosition.ClickedPosition => castInfo.ClickedPosition.point + castInfo.ClickedPosition.normal * 0.5f,
+                _ => Vector3.zero
+            };
+
+            var rot = SpellConfig.CastPosition switch
+            {
+                SpellCastPosition.FromCastersHands => Quaternion.LookRotation(castInfo.CasterHands.forward.FlatY()),
+                SpellCastPosition.ClickedPosition => Quaternion.identity,
+                _ => Quaternion.identity
+            };
+            
             SpellView spellView = Object.Instantiate(
                 SpellConfig.SpellPrefab, 
-                castInfo.CasterHandsForward.position, 
-                Quaternion.LookRotation(castInfo.CasterHandsForward.forward.FlatY()));
+                pos, 
+                rot
+            );
             
-            spellView.Init(this);
+            spellView.Init(this, castInfo);
             yield return null;
         }
     }

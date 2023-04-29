@@ -5,18 +5,18 @@ using MainGame.Stats.Interfaces;
 using NaughtyAttributes;
 using UnityEngine;
 
-namespace MainGame.Player
+namespace MainGame.Entities.Player
 {
     public class Player : MonoBehaviour, IStatHolder
     {
         [Expandable] [Required]
-        [SerializeField] private CharacterStatsSO _playerDefaultStats;
+        [SerializeField] private CharacterStatsConfigSO _playerDefaultStatsConfig;
         
         private Dictionary<Type, object> _statsDict;
 
         void IStatHolder.InitializeStatLibrary()
         {
-            _statsDict = _playerDefaultStats.GetStatLibrary();
+            _statsDict = _playerDefaultStatsConfig.GetStatLibrary();
         }
 
         bool IStatHolder.GetStat<T>(out T stat)

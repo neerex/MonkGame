@@ -12,18 +12,21 @@ namespace MainGame.Abilities.Spells.Types
     {
         [Required][SerializeField] private SphereTriggerObserver _triggerObserver;
         [SerializeField] private Rigidbody _rigidbody;
-
+        
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
             Destroy(gameObject,10);
         }
 
-        public override void Init(Spell spell)
+        public override void Init(Spell spell, SpellCastInfo spellCastInfo)
         {
-            base.Init(spell);
+            base.Init(spell, spellCastInfo);
             _triggerObserver.TriggerEnter += ApplyCollisionEffects;
-            Instantiate(Spell.SpellConfig.MuzzleFlashVfx, transform.position, Quaternion.identity);
+            if (Spell.SpellConfig.MuzzleFlashVfx != null)
+            {
+                Instantiate(Spell.SpellConfig.MuzzleFlashVfx, transform.position, Quaternion.identity);
+            }
             
             Spell.GetStat(out ProjectileSpeedStat stat);
             if (stat != null)
@@ -48,16 +51,20 @@ namespace MainGame.Abilities.Spells.Types
                 } 
             }
             
-            if (other.TryGetComponent(out IDamagable damagable))
+            if (other.TryGetComponent(out IDamageable damageable))
             {
                 Spell.GetStat(out DamageStat stat);
                 if (stat != null)
                 {
-                    damagable.TakeDamage(stat.Value);
+                    damageable.TakeDamage(stat.Value);
                 }
             }
 
-            Instantiate(Spell.SpellConfig.HitVfx, transform.position, Quaternion.LookRotation(Vector3.back, Vector3.up));
+            if (Spell.SpellConfig.HitVfx != null)
+            {
+                Instantiate(Spell.SpellConfig.HitVfx, transform.position, Quaternion.LookRotation(Vector3.back, Vector3.up));
+            }
+            
             Destroy(gameObject);
         }
     }

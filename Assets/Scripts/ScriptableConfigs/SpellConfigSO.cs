@@ -16,17 +16,16 @@ namespace MainGame.ScriptableConfigs
         [field: SerializeField] public float Knockback { get; private set; }
         [field: SerializeField] public float ProjectileSpeed { get; private set; }
         [field: SerializeField] public int Bounce { get; private set; }
+        [field: SerializeField] public int Radius { get; private set; }
         [field: SerializeField] public string AnimationClipName { get; private set; }
         [field: SerializeField] public SpellCastPosition CastPosition { get; private set; }
         [field: SerializeField] public MovementType MovementType { get; private set; }
         [field: SerializeField] public SpellType SpellType { get; private set; }
-        [field: SerializeField] public int AnimationHash { get; private set; }
-        
-        private void OnValidate()
-        {
-            AnimationHash = Animator.StringToHash(AnimationClipName);
-        }
-        
+        public int AnimationHash { get; private set; }
+
+        private void Awake() => AnimationHash = Animator.StringToHash(AnimationClipName);
+        private void OnValidate() => AnimationHash = Animator.StringToHash(AnimationClipName);
+
         public Dictionary<Type, object> GetStatLibrary()
         {
             Dictionary<Type, object> statsDict = new()
@@ -34,7 +33,8 @@ namespace MainGame.ScriptableConfigs
                 {typeof(DamageStat), new DamageStat(Damage)},
                 {typeof(KnockbackStat), new KnockbackStat(Knockback)},
                 {typeof(BounceStat), new BounceStat(Bounce)},
-                {typeof(ProjectileSpeedStat), new ProjectileSpeedStat(ProjectileSpeed)}
+                {typeof(ProjectileSpeedStat), new ProjectileSpeedStat(ProjectileSpeed)},
+                {typeof(RadiusStat), new RadiusStat(Radius)}
             };
 
             return statsDict;
@@ -58,7 +58,7 @@ namespace MainGame.ScriptableConfigs
     public enum SpellType
     {
         Fireball = 0,
-        BlastNova = 1,
+        EnergyBlast = 1,
         LightningBolt = 2
     }
 }

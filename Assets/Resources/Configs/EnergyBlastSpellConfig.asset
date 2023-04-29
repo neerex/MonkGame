@@ -10,12 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 973b5d85783d6a74ab696afcdd2450bd, type: 3}
-  m_Name: BlastNovaSpell
+  m_Name: EnergyBlastSpellConfig
   m_EditorClassIdentifier: 
-  <SpellPrefab>k__BackingField: {fileID: 0}
-  <Damage>k__BackingField: 0
+  <SpellPrefab>k__BackingField: {fileID: 39859169562846813, guid: 333610788b476c043bcd44ac63a3a64e,
+    type: 3}
+  <MuzzleFlashVfx>k__BackingField: {fileID: 0}
+  <HitVfx>k__BackingField: {fileID: 0}
+  <Damage>k__BackingField: 100
+  <Knockback>k__BackingField: 10
+  <ProjectileSpeed>k__BackingField: 0
+  <Bounce>k__BackingField: 0
+  <Radius>k__BackingField: 4
   <AnimationClipName>k__BackingField: TwoHandsUpChannelingCast
   <CastPosition>k__BackingField: 1
   <MovementType>k__BackingField: 0
   <SpellType>k__BackingField: 1
-  <AnimationHash>k__BackingField: 1688220665

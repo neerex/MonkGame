@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MainGame.Player
+namespace MainGame.Entities.Player
 {
     public class IsGroundProvider : MonoBehaviour
     {

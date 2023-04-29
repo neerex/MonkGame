@@ -1,5 +1,6 @@
 using System.Collections;
-using MainGame.Player.Animation;
+using MainGame.Entities.Player.Animation;
+using MainGame.ScriptableConfigs;
 using MainGame.Services.Input.Interfaces;
 using MainGame.Services.Raycast.Interfaces;
 using UnityEngine;
@@ -18,16 +19,18 @@ namespace MainGame.Abilities.Spells
         
         private IPlayerInputService _inputService;
         private IMouseRaycastService _mouseRaycastService;
+        private LayerMaskConfigSO _layerMasks;
 
         private Spell _currentlyCastingSpell;
         private int _currentSpellIndexToCast = -1;
         public SpellBook SpellBook { get; private set; }
         
         [Inject]
-        public void Construct(IPlayerInputService inputService, IMouseRaycastService mouseRaycastService)
+        public void Construct(IPlayerInputService inputService, IMouseRaycastService mouseRaycastService, LayerMaskConfigSO layerMaskConfig)
         {
             _inputService = inputService;
             _mouseRaycastService = mouseRaycastService;
+            _layerMasks = layerMaskConfig;
             
             _inputService.OnMainAttackPerformed += CastMainSpell;
             _inputService.OnSecondaryAttackPerformed += CastSecondarySpell;
@@ -54,10 +57,14 @@ namespace MainGame.Abilities.Spells
 
             _currentlyCastingSpell = SpellBook[_currentSpellIndexToCast];
             
-            SpellCastInfo spellCastInfo = new SpellCastInfo()
+            SpellCastInfo spellCastInfo = new SpellCastInfo
             {
-                CasterHandsForward = _placeToCastFrom
+                Source = gameObject,
+                CasterHands = _placeToCastFrom,
+                ClickedPosition = _mouseRaycastService.GetPointOnSurface(_layerMasks.LevelSurroundings),
+                LayerToDamage = _layerMasks.Enemies
             };
+            
             yield return _currentlyCastingSpell.BeginCast(spellCastInfo);
             
             _currentlyCastingSpell = null;

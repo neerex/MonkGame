@@ -729,7 +729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544a255475273214684f0cab1e2c0581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerDefaultStats: {fileID: 11400000, guid: 951d7cc003c4f674ba966fbdafd9dc0b,
+  _playerDefaultStatsConfig: {fileID: 11400000, guid: 951d7cc003c4f674ba966fbdafd9dc0b,
     type: 2}
 --- !u!114 &835678943273033497
 MonoBehaviour:

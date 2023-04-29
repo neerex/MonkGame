@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
-using MainGame.Stats;
 using MainGame.Stats.ConcreteStat;
 using UnityEngine;
 
 namespace MainGame.ScriptableConfigs
 {
     [CreateAssetMenu(fileName = "CharacterStats", menuName = "Stats/CharacterStats")]
-    public class CharacterStatsSO : ScriptableObject
+    public class CharacterStatsConfigSO : ScriptableObject
     {
         [SerializeField] private float _maxHealth;
         [SerializeField] private float _damage;

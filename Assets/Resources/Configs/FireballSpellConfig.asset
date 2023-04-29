@@ -20,7 +20,7 @@ MonoBehaviour:
     type: 3}
   <Damage>k__BackingField: 10
   <Knockback>k__BackingField: 5
-  <ProjectileSpeed>k__BackingField: 30
+  <ProjectileSpeed>k__BackingField: 20
   <Bounce>k__BackingField: 0
   <AnimationClipName>k__BackingField: TwoHandsForwardCast
   <CastPosition>k__BackingField: 0

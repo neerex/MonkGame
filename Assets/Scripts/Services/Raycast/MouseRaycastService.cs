@@ -34,18 +34,18 @@ namespace MainGame.Services.Raycast
             return direction;
         }
 
-        public Vector3 GetPointOnSurface(LayerMask layerMask)
+        public RaycastHit GetPointOnSurface(LayerMask layerMask)
         {
             _cameraRig ??= _cameraService.CameraRig;
-            if (_cameraRig is null) return Vector3.zero;
+            if (_cameraRig is null) return default;
             
             Ray ray = _cameraRig.Camera.ScreenPointToRay(_inputService.GetMousePosition());
             if (Physics.Raycast(ray, out RaycastHit hitInfo, 1000f, layerMask))
             {
-                return hitInfo.point;
+                return hitInfo;
             }
 
-            return Vector3.zero;
+            return default;
         }
     }
 }
