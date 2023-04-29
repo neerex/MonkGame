@@ -22,6 +22,7 @@ namespace MainGame.Abilities.Spells
         private LayerMaskConfigSO _layerMasks;
 
         private Spell _currentlyCastingSpell;
+        private SpellCastInfo _spellCastInfo;
         private int _currentSpellIndexToCast = -1;
         public SpellBook SpellBook { get; private set; }
         
@@ -57,15 +58,7 @@ namespace MainGame.Abilities.Spells
 
             _currentlyCastingSpell = SpellBook[_currentSpellIndexToCast];
             
-            SpellCastInfo spellCastInfo = new SpellCastInfo
-            {
-                Source = gameObject,
-                CasterHands = _placeToCastFrom,
-                ClickedPosition = _mouseRaycastService.GetPointOnSurface(_layerMasks.LevelSurroundings),
-                LayerToDamage = _layerMasks.Enemies
-            };
-            
-            yield return _currentlyCastingSpell.BeginCast(spellCastInfo);
+            yield return _currentlyCastingSpell.BeginCast(_spellCastInfo);
             
             _currentlyCastingSpell = null;
             
@@ -87,9 +80,21 @@ namespace MainGame.Abilities.Spells
             Spell spellToCast = SpellBook[spellBookIndex];
             if (spellToCast != null)
             {
+                _spellCastInfo = CollectCastInfo();
                 _currentSpellIndexToCast = spellBookIndex;
                 _playerAnimator.PlayerAnimationWithHash(spellToCast.SpellConfig.AnimationHash);
             }
+        }
+
+        private SpellCastInfo CollectCastInfo()
+        {
+            return new SpellCastInfo
+            {
+                Source = gameObject,
+                CasterHands = _placeToCastFrom,
+                ClickedPosition = _mouseRaycastService.GetPointOnSurface(_layerMasks.LevelSurroundings),
+                LayerToDamage = _layerMasks.Enemies
+            };
         }
     }
 }
