@@ -58,7 +58,7 @@ namespace MainGame.Entities.Player
         private void Move()
         {
             if(_movementSpeed is null) return;
-            var direction = _inputService.GetInputDirection();
+            var direction = _inputService.GetInputXZDirection();
             var velocity = _movementSpeed.Value * direction;
             velocity.y = _rigidbody.velocity.y;
             _rigidbody.velocity = velocity;

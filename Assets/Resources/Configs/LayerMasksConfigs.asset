@@ -15,12 +15,12 @@ MonoBehaviour:
   <LevelSurroundings>k__BackingField:
     serializedVersion: 2
     m_Bits: 384
-  <Enemies>k__BackingField:
+  <HitableByPlayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 69632
   <Player>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
-  <Ground>k__BackingField:
+  <Landing>k__BackingField:
     serializedVersion: 2
     m_Bits: 4480

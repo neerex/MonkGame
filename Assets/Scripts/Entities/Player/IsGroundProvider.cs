@@ -16,7 +16,7 @@ namespace MainGame.Entities.Player
         [Inject]
         public void Construct(LayerMaskConfigSO layerMaskConfig)
         {
-            _groundLayer = layerMaskConfig.Ground;
+            _groundLayer = layerMaskConfig.Landing;
         }
         
         private void Update()

@@ -13,7 +13,7 @@ namespace MainGame.Services.Input.Interfaces
         event System.Action<InputAction.CallbackContext> OnAttack3Performed;
         event System.Action<InputAction.CallbackContext> OnAttack4Performed;
         
-        Vector3 GetInputDirection();
+        Vector3 GetInputXZDirection();
         Vector2 GetMousePosition();
         void SubscribeOnInputCallbacks();
         void UnsubscribeFromInputCallbacks();

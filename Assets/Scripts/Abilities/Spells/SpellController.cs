@@ -82,7 +82,7 @@ namespace MainGame.Abilities.Spells
             {
                 _spellCastInfo = CollectCastInfo();
                 _currentSpellIndexToCast = spellBookIndex;
-                _playerAnimator.PlayerAnimationWithHash(spellToCast.SpellConfig.AnimationHash);
+                _playerAnimator.PlayAnimationWithHash(spellToCast.SpellConfig.AnimationHash);
             }
         }
 
@@ -93,7 +93,7 @@ namespace MainGame.Abilities.Spells
                 Source = gameObject,
                 CasterHands = _placeToCastFrom,
                 ClickedPosition = _mouseRaycastService.GetPointOnSurface(_layerMasks.LevelSurroundings),
-                LayerToDamage = _layerMasks.Enemies
+                LayerToDamage = _layerMasks.HitableByPlayer
             };
         }
     }

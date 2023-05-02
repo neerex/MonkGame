@@ -1,10 +1,14 @@
+using System;
 using MainGame.Services.Input.Interfaces;
 using MainGame.Stats.ConcreteStat;
 using MainGame.Stats.Interfaces;
 using MainGame.Utilities;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using Zenject;
+using Logger = MainGame.Utilities.Logger;
 
 namespace MainGame.Entities.Player.Animation
 {
@@ -66,7 +70,7 @@ namespace MainGame.Entities.Player.Animation
             if(_movementSpeed == null || _inputService == null) return;
             _animator.SetBool(_isGrounded, _groundProvider.IsGround);
             float smoothSpeedPercent = GetSmoothSpeedPercent();
-            SetWalkDirectionFromAngle(AngleBetweenLookAndVelocity(), smoothSpeedPercent);
+            SetWalkDirectionFromAngle(smoothSpeedPercent);
             _animator.SetFloat(_walkingSpeed, smoothSpeedPercent , 0.1f, Time.deltaTime);
         }
 
@@ -75,12 +79,11 @@ namespace MainGame.Entities.Player.Animation
             _inputService.OnJumpInputPerformed -= StartJumpAnimation;
         }
 
-        public void PlayMainAttack() => _animator.CrossFade(_mainAttackAnimationHash, _animationSmooth);
-        public void PlaySecondaryAttack() => _animator.CrossFade(_secondaryAttackAnimationHash, _animationSmooth);
-        public void PlayAttackSlot1() => _animator.CrossFade(_attack1AnimationHash, _animationSmooth);
-        public void PlayerAnimationWithHash(int hash) => _animator.CrossFade(hash, _animationSmooth);
-
-
+        public void PlayMainAttack() => PlayAnimationWithHash(_mainAttackAnimationHash);
+        public void PlaySecondaryAttack() => PlayAnimationWithHash(_secondaryAttackAnimationHash);
+        public void PlayAttackSlot1() => PlayAnimationWithHash(_attack1AnimationHash);
+        public void PlayAnimationWithHash(int hash) => _animator.CrossFade(hash, _animationSmooth);
+        
         public void InitializeStats() => _statHolder.GetStat(out _movementSpeed);
 
         private void StartJumpAnimation(InputAction.CallbackContext context)
@@ -89,14 +92,6 @@ namespace MainGame.Entities.Player.Animation
             {
                 _animator.CrossFade(_jumpAnimationHash, _animationSmooth);
             }
-        }
-
-        private float AngleBetweenLookAndVelocity()
-        {
-            var inputDirection = _inputService.GetInputDirection();
-            if (inputDirection == Vector3.zero) return _directionAngle;
-            _directionAngle = Vector3.SignedAngle(transform.forward.FlatY(), inputDirection, Vector3.up);
-            return _directionAngle;
         }
 
         private float GetSmoothSpeedPercent()
@@ -111,9 +106,10 @@ namespace MainGame.Entities.Player.Animation
             return _currentPercentSpeedBlendValue;
         }
 
-        private void SetWalkDirectionFromAngle(float angle, float speed)
+        private void SetWalkDirectionFromAngle(float speed)
         {
-            Vector2 desiredVelocity = Quaternion.AngleAxis(-angle, Vector3.forward) * Vector3.up * speed;
+            Vector3 relativeVelocity = transform.InverseTransformVector(_inputService.GetInputXZDirection());
+            Vector2 desiredVelocity = new Vector2(relativeVelocity.x, relativeVelocity.z)  * speed;
             
             _currentVelocityBlendValue = Vector2.SmoothDamp(_currentVelocityBlendValue, 
                 desiredVelocity, 
