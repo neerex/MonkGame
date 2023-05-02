@@ -27,8 +27,8 @@ namespace MainGame.Services.Input
         // ReSharper disable Unity.PerformanceAnalysis
         public Vector3 GetInputXZDirection()
         {
-            var movementVector = _gameInput.Gameplay.Movement.ReadValue<Vector2>();
-            var direction = new Vector3(movementVector.x, 0, movementVector.y);
+            Vector2 movementVector = _gameInput.Gameplay.Movement.ReadValue<Vector2>();
+            Vector3 direction = new Vector3(movementVector.x, 0, movementVector.y);
             direction.Normalize();
             return direction;
         }

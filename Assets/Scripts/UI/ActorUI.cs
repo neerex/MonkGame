@@ -19,8 +19,8 @@ namespace MainGame.UI
         {
             if (_health != null)
             {
-                _health.ValueChanged -= UpdateHealthView;
-                _health.ValueChanged -= AnimateChange;
+                _health.OnValueChanged -= UpdateHealthView;
+                _health.OnValueChanged -= AnimateChange;
             } 
         }
 
@@ -28,8 +28,8 @@ namespace MainGame.UI
         {
             _health ??= health;
             
-            _health.ValueChanged += UpdateHealthView;
-            _health.ValueChanged += AnimateChange;
+            _health.OnValueChanged += UpdateHealthView;
+            _health.OnValueChanged += AnimateChange;
 
             UpdateHealthView(_health.Current, _health.Current);
         }

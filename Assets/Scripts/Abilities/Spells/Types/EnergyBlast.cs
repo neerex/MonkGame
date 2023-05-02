@@ -44,14 +44,14 @@ namespace MainGame.Abilities.Spells.Types
             {
                 if(_colliders[i] is null) continue;
 
-                if (_colliders[i].TryGetComponent(out IDamageable damageable))
-                    damageable.TakeDamage(_damageStat.Value);
-
                 if (_colliders[i].TryGetComponent(out IPushable pushable))
                 {
                     Vector3 pushDirection = pushable.Transform.position - transform.position + Vector3.up * Random.Range(0.2f, 1.5f);
                     pushable.Push(pushDirection, _knockback.Value);
                 }
+                
+                if (_colliders[i].TryGetComponent(out IDamageable damageable))
+                    damageable.TakeDamage(_damageStat.Value);
             }
             
             Destroy(gameObject, 1f);

@@ -62,10 +62,11 @@ namespace MainGame.Abilities.Spells.Types
 
             if (Spell.SpellConfig.HitVfx != null)
             {
-                Instantiate(Spell.SpellConfig.HitVfx, transform.position, Quaternion.LookRotation(Vector3.back, Vector3.up));
+                Instantiate(Spell.SpellConfig.HitVfx, transform.position, Quaternion.LookRotation(-transform.forward, Vector3.up));
             }
-            
-            Destroy(gameObject);
+
+            _rigidbody.velocity = Vector3.zero;
+            Destroy(gameObject,1f);
         }
     }
 }

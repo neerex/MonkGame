@@ -30,7 +30,7 @@ namespace MainGame.Stats
 		
 		public event Action<StatModifier<T>> ModifierAdded;
 		public event Action<StatModifier<T>> ModifierRemoved;
-		public event ValueChangedDelegate<T> ValueChanged;
+		public event ValueChangedDelegate<T> OnValueChanged;
 
 		protected ModifiableStat(T baseValue)
 		{
@@ -88,7 +88,7 @@ namespace MainGame.Stats
 			_value = finalValue;
 			_isDirty = false;
 			Logger.Log($"CurrMax :{_value}", GetType().Name, Color.cyan);
-			ValueChanged?.Invoke(oldValue, _value);
+			OnValueChanged?.Invoke(oldValue, _value);
 		}
     }
 }

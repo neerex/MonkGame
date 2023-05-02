@@ -6,7 +6,7 @@ namespace MainGame.CharacterResources.Interfaces
     {
         float Current { get; }
         float Max { get; }
-        event ValueChangedDelegate<float> ValueChanged;
+        event ValueChangedDelegate<float> OnValueChanged;
         void TakeDamage(float amount);
         void Heal(float amount);
     }

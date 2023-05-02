@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using MainGame.CharacterResources.Interfaces;
-using MainGame.Stats;
 using MainGame.Stats.ConcreteStat;
 using MainGame.Stats.Interfaces;
 using MainGame.Utilities;
@@ -29,7 +28,7 @@ namespace MainGame.CharacterResources
             }
         }
 
-        public event ValueChangedDelegate<float> ValueChanged;
+        public event ValueChangedDelegate<float> OnValueChanged;
 
         private void Awake()
         {
@@ -39,14 +38,14 @@ namespace MainGame.CharacterResources
         private void OnDestroy()
         {
             if(_maxHealthStat != null) 
-                _maxHealthStat.ValueChanged -= OnMaxValueChanged;
+                _maxHealthStat.OnValueChanged -= OnMaxOnValueChanged;
         }
 
         void IStatsReader.InitializeStats()
         {
             _statHolder.GetStat(out _maxHealthStat);
             Current = Max;
-            _maxHealthStat.ValueChanged += OnMaxValueChanged;
+            _maxHealthStat.OnValueChanged += OnMaxOnValueChanged;
         }
 
         [Button("Take Damage")] 
@@ -82,12 +81,12 @@ namespace MainGame.CharacterResources
             Current = Math.Clamp(Current, 0, _maxHealthStat.Value);
             if (!Mathf.Approximately(oldValue, Current))
             {
-                ValueChanged?.Invoke(oldValue, Current);
+                OnValueChanged?.Invoke(oldValue, Current);
                 Logger.Log($"Current Health: {Current}", gameObject, Color.green);
             }
         }
         
-        private void OnMaxValueChanged(float oldValue, float newValue) => 
-            ValueChanged?.Invoke(Current, Current);
+        private void OnMaxOnValueChanged(float oldValue, float newValue) => 
+            OnValueChanged?.Invoke(Current, Current);
     }
 }

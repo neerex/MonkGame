@@ -2,6 +2,6 @@
 {
     public interface ISpellBookHolder
     {
-        SpellBook SpellBook {get; }
+        SpellBook SpellBook { get; }
     }
 }
