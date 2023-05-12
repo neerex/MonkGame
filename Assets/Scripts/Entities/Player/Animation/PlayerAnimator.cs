@@ -1,5 +1,5 @@
 using System;
-using MainGame.Services.Input.Interfaces;
+using MainGame.Infrastructure.Services.Input.Interfaces;
 using MainGame.Stats.ConcreteStat;
 using MainGame.Stats.Interfaces;
 using MainGame.Utilities;

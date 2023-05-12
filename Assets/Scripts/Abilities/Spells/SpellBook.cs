@@ -13,7 +13,7 @@ namespace MainGame.Abilities.Spells
         public Spell this[int index] => _spells[index];
 
         public event Action<SpellBook> OnSpellPositionInTheBookChanged;
-        public event Action<SpellBook> SpellAdded;
+        public event Action<SpellBook, int> OnSpellAdded;
 
         public SpellBook(int capacity)
         {
@@ -33,7 +33,7 @@ namespace MainGame.Abilities.Spells
             if (GetFreeSlot(out int index))
             {
                 _spells[index] = new Spell(spellConfig);
-                SpellAdded?.Invoke(this);
+                OnSpellAdded?.Invoke(this, index);
                 Logger.Log($"Spell added in SpellBook. SpellName: {spellConfig.name.Replace("Config", "")}", Color.green);
                 return true;
             }

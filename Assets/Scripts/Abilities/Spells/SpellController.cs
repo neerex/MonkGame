@@ -1,8 +1,8 @@
 using System.Collections;
 using MainGame.Entities.Player.Animation;
+using MainGame.Infrastructure.Services.Input.Interfaces;
+using MainGame.Infrastructure.Services.Raycast.Interfaces;
 using MainGame.ScriptableConfigs;
-using MainGame.Services.Input.Interfaces;
-using MainGame.Services.Raycast.Interfaces;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;

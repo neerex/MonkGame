@@ -1,14 +1,20 @@
-using MainGame.Services.Asset;
-using MainGame.Services.Asset.Interfaces;
-using MainGame.Services.AsyncRoutine;
-using MainGame.Services.AsyncRoutine.Interfaces;
-using MainGame.Services.Camera;
-using MainGame.Services.Camera.Interfaces;
-using MainGame.Services.Input;
-using MainGame.Services.Input.Interfaces;
-using MainGame.Services.Raycast;
-using MainGame.Services.Raycast.Interfaces;
-using Zenject;
+using System;
+using MainGame.Infrastructure.Services.Asset;
+using MainGame.Infrastructure.Services.Asset.Interfaces;
+using MainGame.Infrastructure.Services.AsyncRoutine;
+using MainGame.Infrastructure.Services.AsyncRoutine.Interfaces;
+using MainGame.Infrastructure.Services.Camera;
+using MainGame.Infrastructure.Services.Camera.Interfaces;
+using MainGame.Infrastructure.Services.EntitiesProviders.Player;
+using MainGame.Infrastructure.Services.EntitiesProviders.Player.Interfaces;
+using MainGame.Infrastructure.Services.Input;
+using MainGame.Infrastructure.Services.Input.Interfaces;
+using MainGame.Infrastructure.Services.Raycast;
+using MainGame.Infrastructure.Services.Raycast.Interfaces;
+using MainGame.Infrastructure.StateMachine;
+using MainGame.Infrastructure.StateMachine.BootstrapStates;
+using MainGame.Infrastructure.StateMachine.Core;
+using Zenject; 
 
 namespace MainGame.Installers
 {
@@ -16,13 +22,14 @@ namespace MainGame.Installers
     {
         public override void InstallBindings()
         {
-            //no dependencies
             BindAssetProvider();
             BindInjectedAssetProvider();
             BindPlayerInputService();
             BindCoroutineRunner();
+            BindPlayerProvider();
             
-            //multiple dependencies
+            BindGameStatemachine();
+
             BindCameraService();
             BindMouseRaycastService();
         }
@@ -48,7 +55,21 @@ namespace MainGame.Installers
                 .To<CoroutineRunner>()
                 .FromNewComponentOnNewGameObject()
                 .WithGameObjectName("[COROUTINE RUNNER]")
-                .AsSingle(); 
+                .AsSingle()
+                .NonLazy(); 
+        }
+
+        private void BindPlayerProvider()
+        {
+            Container.Bind<IPlayerProvider>().To<PlayerProvider>().AsSingle();
+        }
+
+        private void BindGameStatemachine()
+        {
+            Container.Bind<GameStatemachine>()
+                .FromSubContainerResolve()
+                .ByInstaller<GameStatemachineInstaller>()
+                .AsSingle();
         }
 
         private void BindMouseRaycastService()

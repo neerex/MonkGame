@@ -1,4 +1,4 @@
-using MainGame.Services.Camera.Interfaces;
+using MainGame.Infrastructure.Services.Camera.Interfaces;
 using UnityEngine;
 using Zenject;
 

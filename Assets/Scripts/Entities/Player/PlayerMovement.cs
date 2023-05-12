@@ -1,5 +1,5 @@
-﻿using MainGame.Services.Input.Interfaces;
-using MainGame.Services.Raycast.Interfaces;
+﻿using MainGame.Infrastructure.Services.Input.Interfaces;
+using MainGame.Infrastructure.Services.Raycast.Interfaces;
 using MainGame.Stats.ConcreteStat;
 using MainGame.Stats.Interfaces;
 using UnityEngine;
