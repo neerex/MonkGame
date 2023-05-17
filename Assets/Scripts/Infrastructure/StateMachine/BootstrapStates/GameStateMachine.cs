@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using MainGame.Infrastructure.StateMachine.Core;
+﻿using MainGame.Infrastructure.StateMachine.Core;
 
 namespace MainGame.Infrastructure.StateMachine.BootstrapStates
 {

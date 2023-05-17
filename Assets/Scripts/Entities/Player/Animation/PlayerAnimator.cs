@@ -1,14 +1,10 @@
-using System;
 using MainGame.Infrastructure.Services.Input.Interfaces;
 using MainGame.Stats.ConcreteStat;
 using MainGame.Stats.Interfaces;
 using MainGame.Utilities;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 using Zenject;
-using Logger = MainGame.Utilities.Logger;
 
 namespace MainGame.Entities.Player.Animation
 {

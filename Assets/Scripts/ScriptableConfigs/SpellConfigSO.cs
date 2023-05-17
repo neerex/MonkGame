@@ -12,12 +12,18 @@ namespace MainGame.ScriptableConfigs
         [field: SerializeField] public SpellView SpellPrefab { get; private set; }
         [field: SerializeField] public ParticleSystem MuzzleFlashVfx { get; private set; }
         [field: SerializeField] public ParticleSystem HitVfx { get; private set; }
+        [field: SerializeField] public Sprite SpellSprite { get; private set; }
+        
         [field: SerializeField] public float Damage { get; private set; }
+        [field: SerializeField] public float Cooldown { get; private set; }
+        [field: SerializeField] public float CastSpeed { get; private set; }
         [field: SerializeField] public float Knockback { get; private set; }
         [field: SerializeField] public float ProjectileSpeed { get; private set; }
         [field: SerializeField] public int Bounce { get; private set; }
-        [field: SerializeField] public int Radius { get; private set; }
+        [field: SerializeField] public float Radius { get; private set; }
+        
         [field: SerializeField] public string AnimationClipName { get; private set; }
+        
         [field: SerializeField] public SpellCastPosition CastPosition { get; private set; }
         [field: SerializeField] public MovementType MovementType { get; private set; }
         [field: SerializeField] public SpellType SpellType { get; private set; }
@@ -34,7 +40,9 @@ namespace MainGame.ScriptableConfigs
                 {typeof(KnockbackStat), new KnockbackStat(Knockback)},
                 {typeof(BounceStat), new BounceStat(Bounce)},
                 {typeof(ProjectileSpeedStat), new ProjectileSpeedStat(ProjectileSpeed)},
-                {typeof(RadiusStat), new RadiusStat(Radius)}
+                {typeof(RadiusStat), new RadiusStat(Radius)},
+                {typeof(Cooldown), new Cooldown(Cooldown)},
+                {typeof(CastSpeed), new CastSpeed(CastSpeed)}
             };
 
             return statsDict;

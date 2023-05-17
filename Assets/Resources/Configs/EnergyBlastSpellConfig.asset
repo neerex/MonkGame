@@ -16,7 +16,10 @@ MonoBehaviour:
     type: 3}
   <MuzzleFlashVfx>k__BackingField: {fileID: 0}
   <HitVfx>k__BackingField: {fileID: 0}
+  <SpellSprite>k__BackingField: {fileID: 0}
   <Damage>k__BackingField: 100
+  <Cooldown>k__BackingField: 5
+  <CastSpeed>k__BackingField: 1
   <Knockback>k__BackingField: 10
   <ProjectileSpeed>k__BackingField: 0
   <Bounce>k__BackingField: 0

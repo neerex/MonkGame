@@ -1,4 +1,3 @@
-using System;
 using MainGame.Infrastructure.Services.Asset;
 using MainGame.Infrastructure.Services.Asset.Interfaces;
 using MainGame.Infrastructure.Services.AsyncRoutine;
@@ -11,9 +10,7 @@ using MainGame.Infrastructure.Services.Input;
 using MainGame.Infrastructure.Services.Input.Interfaces;
 using MainGame.Infrastructure.Services.Raycast;
 using MainGame.Infrastructure.Services.Raycast.Interfaces;
-using MainGame.Infrastructure.StateMachine;
 using MainGame.Infrastructure.StateMachine.BootstrapStates;
-using MainGame.Infrastructure.StateMachine.Core;
 using Zenject; 
 
 namespace MainGame.Installers
@@ -22,25 +19,26 @@ namespace MainGame.Installers
     {
         public override void InstallBindings()
         {
-            BindAssetProvider();
-            BindInjectedAssetProvider();
+            BindTimerService();
+            BindAssetProviders();
             BindPlayerInputService();
             BindCoroutineRunner();
             BindPlayerProvider();
-            
+
             BindGameStatemachine();
 
             BindCameraService();
             BindMouseRaycastService();
         }
 
-        private void BindAssetProvider()
+        private void BindTimerService()
         {
-            Container.Bind<IAssetProvider>().To<AssetProvider>().AsSingle();
+            TimerInstaller.Install(Container);
         }
 
-        private void BindInjectedAssetProvider()
+        private void BindAssetProviders()
         {
+            Container.Bind<IAssetProvider>().To<AssetProvider>().AsSingle();
             Container.Bind<IInjectedAssetProvider>().To<InjectedAssetProvider>().AsSingle();
         }
 

@@ -1,9 +1,7 @@
-using System;
 using System.Collections;
 using MainGame.Damage.Effects;
 using MainGame.Stats.ConcreteStat;
 using UnityEngine;
-using Logger = MainGame.Utilities.Logger;
 using Random = UnityEngine.Random;
 
 namespace MainGame.Abilities.Spells.Types

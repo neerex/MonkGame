@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using MainGame.Utilities;
 
 namespace MainGame.Infrastructure.StateMachine.Core
 {
@@ -13,8 +12,6 @@ namespace MainGame.Infrastructure.StateMachine.Core
         {
             Type type = typeof(TState);
             States[type] = state;
-            
-            Logger.Log($"State {state} added. States count: {States.Count}");
         }
 
         public void Enter<TState>() where TState : class, IState

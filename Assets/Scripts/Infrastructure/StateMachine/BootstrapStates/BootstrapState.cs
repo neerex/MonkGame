@@ -15,7 +15,6 @@ namespace MainGame.Infrastructure.StateMachine.BootstrapStates
         public void Enter()
         {
             // warm up services
-            
             _gameStatemachine.EnterLoadLevelState();
         }
 
@@ -24,6 +23,6 @@ namespace MainGame.Infrastructure.StateMachine.BootstrapStates
             
         }
         
-        public class Factory : PlaceholderFactory<GameStatemachine, BootstrapState>{}
+        public class Factory : PlaceholderFactory<GameStatemachine, BootstrapState>{} 
     }
 }

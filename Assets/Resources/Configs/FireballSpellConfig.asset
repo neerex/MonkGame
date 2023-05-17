@@ -18,12 +18,15 @@ MonoBehaviour:
     type: 3}
   <HitVfx>k__BackingField: {fileID: 5458226936459284193, guid: 7997ae0aae89ffb4b8ed743630807683,
     type: 3}
+  <SpellSprite>k__BackingField: {fileID: 0}
   <Damage>k__BackingField: 10
+  <Cooldown>k__BackingField: 1
+  <CastSpeed>k__BackingField: 1
   <Knockback>k__BackingField: 5
   <ProjectileSpeed>k__BackingField: 20
   <Bounce>k__BackingField: 0
+  <Radius>k__BackingField: 0
   <AnimationClipName>k__BackingField: TwoHandsForwardCast
   <CastPosition>k__BackingField: 0
   <MovementType>k__BackingField: 1
   <SpellType>k__BackingField: 0
-  <AnimationHash>k__BackingField: 2130521034
