@@ -4,7 +4,7 @@ namespace MainGame.Utilities
 {
     public static class Logger
     {
-        public static void Log(object message, object sender, Color color = default)
+        public static void Log(string message, object sender, Color color = default)
         {
 #if UNITY_EDITOR
             string htmlColor = ColorUtility.ToHtmlStringRGB(color);
@@ -13,7 +13,7 @@ namespace MainGame.Utilities
 #endif
         }
         
-        public static void Log(object message, GameObject sender, Color color = default)
+        public static void Log(string message, GameObject sender, Color color = default)
         {
 #if UNITY_EDITOR
             string htmlColor = ColorUtility.ToHtmlStringRGB(color);
@@ -22,7 +22,7 @@ namespace MainGame.Utilities
 #endif
         }
         
-        public static void Log(object message, Color color = default)
+        public static void Log(string message, Color color = default)
         {
 #if UNITY_EDITOR
             string htmlColor = ColorUtility.ToHtmlStringRGB(color);
@@ -30,7 +30,7 @@ namespace MainGame.Utilities
 #endif
         }
         
-        public static void LogWarning(object message)
+        public static void LogWarning(string message)
         {
 #if UNITY_EDITOR
             string htmlColor = ColorUtility.ToHtmlStringRGB(Color.yellow);
@@ -38,7 +38,7 @@ namespace MainGame.Utilities
 #endif
         }
         
-        public static void LogError(object message)
+        public static void LogError(string message)
         {
 #if UNITY_EDITOR
             string htmlColor = ColorUtility.ToHtmlStringRGB(Color.red);

@@ -11,15 +11,12 @@ namespace MainGame.Infrastructure.Services.Raycast
     {
         private readonly ICameraService _cameraService;
         private readonly IPlayerInputService _inputService;
-        private Plane _plane;
         private CameraRig _cameraRig; 
 
         public MouseRaycastService(IPlayerInputService inputService, ICameraService cameraService)
         {
             _inputService = inputService;
             _cameraService = cameraService;
-            
-            _plane = new Plane(Vector3.up, Vector3.zero);
         }
         
         public Vector3 GetDirectionToRaycastHit(Vector3 fromPosition)
@@ -28,7 +25,8 @@ namespace MainGame.Infrastructure.Services.Raycast
             if (_cameraRig is null) return Vector3.zero;
             
             Ray ray = _cameraRig.Camera.ScreenPointToRay(_inputService.GetMousePosition());
-            _plane.Raycast(ray, out float enter);
+            Plane plane = new Plane(Vector3.up, fromPosition);
+            plane.Raycast(ray, out float enter);
             Vector3 hitPoint = ray.GetPoint(enter);
             Vector3 direction = (hitPoint.FlatY() - fromPosition.FlatY()).normalized;
             return direction;
