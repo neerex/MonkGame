@@ -21,9 +21,11 @@ namespace MainGame.Abilities.Spells
             _spells = new Spell[capacity];
         }
         
-        public bool TryAddSpell(SpellConfigSO spellConfig)
+        public bool TryAddSpell(Spell spell)
         {
-            if (_spells.Any(s => s != null && s.SpellConfig == spellConfig))
+            if (spell == null) return false;
+            
+            if (_spells.Any(s => s != null && s.SpellConfig == spell.SpellConfig))
             {
                 // probably level up spell if pick up same one in the future iteration on this system
                 Logger.Log($"Spell already exist in SpellBook");
@@ -32,9 +34,9 @@ namespace MainGame.Abilities.Spells
             
             if (GetFreeSlot(out int index))
             {
-                _spells[index] = new Spell(spellConfig);
+                _spells[index] = spell;
                 OnSpellAdded?.Invoke(this, index);
-                Logger.Log($"Spell added in SpellBook. SpellName: {spellConfig.name.Replace("Config", "")}", Color.green);
+                Logger.Log($"Spell added in SpellBook. SpellName: {spell.GetType().Name}", Color.green);
                 return true;
             }
 

@@ -8,10 +8,12 @@ namespace MainGame.Installers
     public class GameConfigsInstaller : ScriptableObjectInstaller<GameConfigsInstaller>
     {
         [SerializeField] private LayerMaskConfigSO _layerMaskConfig;
+        [SerializeField] private SpellConfigListSO _spellConfigList;
         
         public override void InstallBindings()
         {
             Container.BindInstance(_layerMaskConfig);
+            Container.BindInstance(_spellConfigList);
         }
     }
 }

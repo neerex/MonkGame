@@ -1380,6 +1380,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7295397428798306389, guid: 87e919217a64f0a40b19011cf608bb13,
         type: 3}
+      propertyPath: _spellType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7295397428798306389, guid: 87e919217a64f0a40b19011cf608bb13,
+        type: 3}
       propertyPath: _spellConfigSo
       value: 
       objectReference: {fileID: 11400000, guid: d3d916cb142c21c418ca4beff7a15593,

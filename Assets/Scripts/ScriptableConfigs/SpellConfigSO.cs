@@ -9,6 +9,7 @@ namespace MainGame.ScriptableConfigs
     [CreateAssetMenu(fileName = "SpellConfig", menuName = "Spell/SpellConfig")]
     public class SpellConfigSO : ScriptableObject
     {
+        [field: SerializeField] public SpellType SpellType { get; private set; }
         [field: SerializeField] public SpellView SpellPrefab { get; private set; }
         [field: SerializeField] public ParticleSystem MuzzleFlashVfx { get; private set; }
         [field: SerializeField] public ParticleSystem HitVfx { get; private set; }
@@ -26,7 +27,6 @@ namespace MainGame.ScriptableConfigs
         
         [field: SerializeField] public SpellCastPosition CastPosition { get; private set; }
         [field: SerializeField] public MovementType MovementType { get; private set; }
-        [field: SerializeField] public SpellType SpellType { get; private set; }
         public int AnimationHash { get; private set; }
 
         private void Awake() => AnimationHash = Animator.StringToHash(AnimationClipName);

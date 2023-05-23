@@ -29,5 +29,21 @@ namespace MainGame.Utilities
             Debug.Log($"<color=#{htmlColor}>{message}</color>");
 #endif
         }
+        
+        public static void LogWarning(object message)
+        {
+#if UNITY_EDITOR
+            string htmlColor = ColorUtility.ToHtmlStringRGB(Color.yellow);
+            Debug.Log($"<color=#{htmlColor}>{message}</color>");
+#endif
+        }
+        
+        public static void LogError(object message)
+        {
+#if UNITY_EDITOR
+            string htmlColor = ColorUtility.ToHtmlStringRGB(Color.red);
+            Debug.Log($"<color=#{htmlColor}>{message}</color>");
+#endif
+        }
     }
 }

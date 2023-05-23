@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43c3b6f9088e2674eafefbde3ac28784, type: 3}
-  m_Name: GameConfigsInstaller
+  m_Script: {fileID: 11500000, guid: dbbfd1d813952fd499bed4cf28a0bddb, type: 3}
+  m_Name: SpellConfigList
   m_EditorClassIdentifier: 
-  _layerMaskConfig: {fileID: 11400000, guid: 3f19faac13de42a478fde9c5af3ca7bc, type: 2}
-  _spellConfigList: {fileID: 11400000, guid: 240caebb0ad3c2a41a99c4097e7d5001, type: 2}
+  SpellConfigs:
+  - {fileID: 11400000, guid: d3d916cb142c21c418ca4beff7a15593, type: 2}
+  - {fileID: 11400000, guid: 2b92991d29b4d984988dae78bd21463c, type: 2}

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using MainGame.Infrastructure.Services.Timer;
 using MainGame.ScriptableConfigs;
 using MainGame.Stats.Interfaces;
 using MainGame.Utilities;
 using UnityEngine;
+using Zenject;
 using Object = UnityEngine.Object;
 
 namespace MainGame.Abilities.Spells
@@ -18,10 +20,11 @@ namespace MainGame.Abilities.Spells
         public SpellConfigSO SpellConfig { get; private set; }
 
         public bool IsCasting { get; private set; }
+        public bool CanCast;
 
         //TODO: Add timer class for cooldown
         
-        public Spell(SpellConfigSO spellConfig)
+        public Spell(SpellConfigSO spellConfig, XTimer.Factory timer)
         {
             SpellConfig = spellConfig;
             ((IStatHolder) this).InitializeStatLibrary();
@@ -90,5 +93,7 @@ namespace MainGame.Abilities.Spells
             spellView.Init(this, castInfo);
             yield return null;
         }
+        
+        public class Factory : PlaceholderFactory<SpellConfigSO, Spell> { }
     }
 }

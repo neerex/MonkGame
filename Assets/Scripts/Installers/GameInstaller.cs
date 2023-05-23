@@ -20,6 +20,8 @@ namespace MainGame.Installers
         public override void InstallBindings()
         {
             BindTimerService();
+            BindSpellFactory();
+            
             BindAssetProviders();
             BindPlayerInputService();
             BindCoroutineRunner();
@@ -34,6 +36,11 @@ namespace MainGame.Installers
         private void BindTimerService()
         {
             TimerInstaller.Install(Container);
+        }
+
+        private void BindSpellFactory()
+        {
+            SpellFactoryInstaller.Install(Container);
         }
 
         private void BindAssetProviders()
