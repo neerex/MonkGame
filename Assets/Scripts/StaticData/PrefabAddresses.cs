@@ -6,5 +6,6 @@
         public const string Player = "Prefabs/Player/Player";
 
         public const string LoadingCurtain = "Prefabs/UI/Loading Curtain";
+        public const string Bootstrapper = "Prefabs/Bootstrap/Bootstrap";
     }
 }

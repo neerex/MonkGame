@@ -3,6 +3,7 @@ using MainGame.Infrastructure.Services.Asset;
 using MainGame.Infrastructure.Services.Asset.Interfaces;
 using MainGame.Infrastructure.Services.AsyncRoutine;
 using MainGame.Infrastructure.Services.AsyncRoutine.Interfaces;
+using MainGame.Infrastructure.Services.Bootstrap;
 using MainGame.Infrastructure.Services.Camera;
 using MainGame.Infrastructure.Services.Camera.Interfaces;
 using MainGame.Infrastructure.Services.EntitiesProviders.Player;
@@ -23,10 +24,11 @@ namespace MainGame.Installers
     {
         public override void InstallBindings()
         {
+            BindGamebootstrapper();
             BindSceneLoader();
             BindAdsService();
             BindLocalizationService();
-            
+
             BindTimerService();
             BindSpellFactory();
             
@@ -39,6 +41,12 @@ namespace MainGame.Installers
 
             BindCameraService();
             BindMouseRaycastService();
+        }
+
+        private void BindGamebootstrapper()
+        {
+            Container.BindFactory<Bootstrapper, Bootstrapper.Factory>().
+                FromComponentInNewPrefabResource(PrefabAddresses.Bootstrapper);
         }
 
         private void BindLocalizationService()
