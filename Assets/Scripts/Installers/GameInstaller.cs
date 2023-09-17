@@ -1,3 +1,4 @@
+using MainGame.Infrastructure.Services.AdsService;
 using MainGame.Infrastructure.Services.Asset;
 using MainGame.Infrastructure.Services.Asset.Interfaces;
 using MainGame.Infrastructure.Services.AsyncRoutine;
@@ -8,9 +9,12 @@ using MainGame.Infrastructure.Services.EntitiesProviders.Player;
 using MainGame.Infrastructure.Services.EntitiesProviders.Player.Interfaces;
 using MainGame.Infrastructure.Services.Input;
 using MainGame.Infrastructure.Services.Input.Interfaces;
+using MainGame.Infrastructure.Services.LocalizationService;
 using MainGame.Infrastructure.Services.Raycast;
 using MainGame.Infrastructure.Services.Raycast.Interfaces;
+using MainGame.Infrastructure.Services.SceneLoader;
 using MainGame.Infrastructure.StateMachine.BootstrapStates;
+using MainGame.StaticData;
 using Zenject; 
 
 namespace MainGame.Installers
@@ -19,6 +23,10 @@ namespace MainGame.Installers
     {
         public override void InstallBindings()
         {
+            BindSceneLoader();
+            BindAdsService();
+            BindLocalizationService();
+            
             BindTimerService();
             BindSpellFactory();
             
@@ -31,6 +39,26 @@ namespace MainGame.Installers
 
             BindCameraService();
             BindMouseRaycastService();
+        }
+
+        private void BindLocalizationService()
+        {
+            Container.Bind<ILocalizationService>().To<LocalizationService>().AsSingle();
+        }
+
+        private void BindAdsService()
+        {
+            Container.Bind<IAdsService>().To<AdsService>().AsSingle();
+        }
+
+        private void BindSceneLoader()
+        {
+            Container.Bind<ILoadingCurtain>()
+                .To<LoadingCurtainView>()
+                .FromComponentInNewPrefabResource(PrefabAddresses.LoadingCurtain)
+                .AsSingle();
+
+            Container.Bind<ISceneLoadService>().To<SceneLoaderService>().AsSingle();
         }
 
         private void BindTimerService()

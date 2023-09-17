@@ -16,7 +16,7 @@ namespace MainGame.Abilities.Spells.Types
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
-            Destroy(gameObject,_maxFlightTime);
+            Destroy(gameObject, _maxFlightTime);
         }
 
         private void OnDestroy()
