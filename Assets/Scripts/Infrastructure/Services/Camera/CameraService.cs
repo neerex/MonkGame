@@ -19,7 +19,7 @@ namespace MainGame.Infrastructure.Services.Camera
 
         public async UniTask<CameraRig> SpawnCameraRig(Vector3 pos)
         {
-            var rig = await _assetProvider.Instantiate(PrefabAddresses.CameraRig, pos);
+            var rig = await _assetProvider.InstantiateAsync(PrefabAddresses.CameraRig, pos);
             CameraRig = rig.GetComponent<CameraRig>();
             return CameraRig;
         }

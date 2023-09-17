@@ -14,8 +14,10 @@ using MainGame.Infrastructure.Services.LocalizationService;
 using MainGame.Infrastructure.Services.Raycast;
 using MainGame.Infrastructure.Services.Raycast.Interfaces;
 using MainGame.Infrastructure.Services.SceneLoader;
+using MainGame.Infrastructure.Services.StaticData;
 using MainGame.Infrastructure.StateMachine.BootstrapStates;
 using MainGame.StaticData;
+using MainGame.UI.Factory;
 using Zenject; 
 
 namespace MainGame.Installers
@@ -24,6 +26,8 @@ namespace MainGame.Installers
     {
         public override void InstallBindings()
         {
+            BindStaticDataService();
+            BindUIFactory();
             BindGamebootstrapper();
             BindSceneLoader();
             BindAdsService();
@@ -41,6 +45,16 @@ namespace MainGame.Installers
 
             BindCameraService();
             BindMouseRaycastService();
+        }
+
+        private void BindStaticDataService()
+        {
+            Container.Bind<IStaticDataService>().To<StaticDataService>().AsSingle();
+        }
+
+        private void BindUIFactory()
+        {
+            Container.Bind<IUIFactory>().To<UIFactory>().AsSingle();
         }
 
         private void BindGamebootstrapper()

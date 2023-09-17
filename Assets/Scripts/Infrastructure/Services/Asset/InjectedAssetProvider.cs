@@ -25,28 +25,28 @@ namespace MainGame.Infrastructure.Services.Asset
 
         public async UniTask<GameObject> Instantiate(string address)
         {
-            var go = await _assetProvider.Instantiate(address);
+            var go = await _assetProvider.InstantiateAsync(address);
             _diContainer.InjectGameObject(go);
             return go;
         }
 
         public async UniTask<GameObject> Instantiate(string address, Vector3 at)
         {
-            var go = await _assetProvider.Instantiate(address, at);
+            var go = await _assetProvider.InstantiateAsync(address, at);
             _diContainer.InjectGameObject(go);
             return go;
         }
 
         public async UniTask<GameObject> Instantiate(string address, Vector3 at, Quaternion rotation)
         {
-            var go = await _assetProvider.Instantiate(address, at, rotation);
+            var go = await _assetProvider.InstantiateAsync(address, at, rotation);
             _diContainer.InjectGameObject(go);
             return go;
         }
 
         public async UniTask<GameObject> Instantiate(string address, Vector3 at, Quaternion rotation, Transform parent)
         {
-            var go = await _assetProvider.Instantiate(address, at, rotation, parent);
+            var go = await _assetProvider.InstantiateAsync(address, at, rotation, parent);
             _diContainer.InjectGameObject(go);
             return go;
         }
