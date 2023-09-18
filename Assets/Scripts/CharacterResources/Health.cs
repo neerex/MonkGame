@@ -48,26 +48,6 @@ namespace MainGame.CharacterResources
             _maxHealthStat.OnValueChanged += OnMaxOnValueChanged;
         }
 
-        [Button("Take Damage")] 
-        public IEnumerator Damage()
-        {
-            for (float i = 0; i < 10; i++)
-            {
-                TakeDamage(10);
-                yield return new WaitForSeconds(0.2f);
-            }
-        }
-
-        [Button("Heal")] 
-        public IEnumerator Heal()
-        {
-            for (float i = 0; i < 10; i++)
-            {
-                Heal(15);
-                yield return new WaitForSeconds(0.2f);
-            }
-        }
-
         public void TakeDamage(float amount) => 
             ChangeCurrentHealthValue(-amount);
 
