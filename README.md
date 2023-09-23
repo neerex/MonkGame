@@ -6,11 +6,11 @@ Project demonstrates a service-like achitecture that uses a Zenject for dependen
 
 ### Whats This Project Contains
 * Fully rigged and smooth moving character that uses new Unity Input System
-* Blendtree animated character movement in every direction
+* Blendtree animated character with smooth movement in every direction
 * Spell animations and VFX
 * Spell system that you can extend on
-* Modifiable Stat system
-* Upgrade Stat system and powerups
+* Modifiable Stat system for spells and characters
+* Powerup System
 * Full Zenject Integration
 
 #### Setup
